@@ -5,97 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
-  <link rel="stylesheet" href="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.css" type="text/css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
   <style>
     body {
-      background-color: #0174DF !important;
       font-family: 'Open Sans', sans-serif;
+      background-color: #0174DF !important;
       color: #110453;
       margin: 0;
       padding: 0;
     }
-    /* Celý kontejner SurveyJS */
-    .sv_main, .sv_container, .sv_body_container {
+    /* Přepsání pozadí hlavních kontejnerů SurveyJS */
+    .sv_main, 
+    .sv_body_container, 
+    .sv_container, 
+    .sv_page, 
+    .sv_header, 
+    .sv_footer {
       background-color: #0174DF !important;
     }
-    /* Přizpůsobení tlačítek – normálně modrá, při hover/aktivaci žlutá, text tmavě fialový */
-    button, .sv_btn, .sv_nav_btn {
-      background-color: #0174DF !important;
+    /* Tlačítka - základní: žlutá, při hover/aktivaci: zelená */
+    .sv_nav_btn, .sd-btn {
+      background-color: #FFD84D !important;
       color: #110453 !important;
       border: none;
-      cursor: pointer;
+      transition: background-color 0.3s;
     }
-    button:hover, .sv_btn:hover, .sv_nav_btn:hover,
-    button:active, .sv_btn:active, .sv_nav_btn:active {
-      background-color: #FFD84D !important;
-      color: #110453 !important;
+    .sv_nav_btn:hover, .sd-btn:hover {
+      background-color: #00C837 !important;
     }
-    /* Chybová hláška – upravena výchozí zpráva */
+    /* Globální nastavení chybové hlášky */
     .sv_q_required_text {
-      color: red;
+      font-style: normal;
     }
-    /* Checkboxy a radiogroup – nezaškrtnuté žluté, po označení zelené */
-    .sv_q_checkbox_control, .sv_q_radiogroup_control {
+    /* Checkboxy */
+    .sv_q_checkbox_control .sv_q_checkbox_label {
       background-color: #FFD84D !important;
-      border-color: #FFD84D !important;
+      color: #110453;
+      padding: 5px;
+      border-radius: 3px;
+      transition: background-color 0.3s;
     }
-    .sv_q_checkbox_control input:checked + label,
-    .sv_q_radiogroup_control input:checked + label {
+    .sv_q_checkbox_control input[type="checkbox"]:checked + label {
       background-color: #00C837 !important;
-      border-color: #00C837 !important;
     }
-    /* Rating – nezaškrtnuté žluté, označené zelené */
-    .sv_q_rating_item, .sv_q_rating_item:hover, .sv_q_rating_item:active {
+    /* Radiogroup */
+    .sv_q_radiogroup_control label {
       background-color: #FFD84D !important;
-      color: #110453 !important;
-      border-color: #FFD84D !important;
+      color: #110453;
+      padding: 5px;
+      border-radius: 3px;
+      transition: background-color 0.3s;
     }
-    .sv_q_rating_item.sv_q_rating_item--selected {
+    .sv_q_radiogroup_control input[type="radio"]:checked + label {
       background-color: #00C837 !important;
-      color: #110453 !important;
-      border-color: #00C837 !important;
     }
-    /* Alternující řádky v matici – liché: modrá, sudé: žlutá */
-    .sd-table tr:nth-child(odd) {
+    /* Rating */
+    .sv_q_rating {
+      background-color: transparent;
+    }
+    .sv_q_rating .sv_q_radiogroup_item {
+      background-color: #FFD84D !important;
+      color: #110453;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+    }
+    .sv_q_rating .sv_q_radiogroup_item input[type="radio"]:checked + label {
+      background-color: #00C837 !important;
+    }
+    /* Comment - stránka s komentářem */
+    .sv_q_comment {
+      background-color: #FFD84D !important;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .sv_q_comment_textarea textarea {
+      background-color: #0174DF !important;
+      color: #110453;
+      padding: 5px;
+      border: 1px solid #110453;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+    }
+    .sv_q_comment_textarea textarea.filled {
+      background-color: #00C837 !important;
+    }
+    /* Matrix - střídání řádků; využíváme třídy SurveyJS pro matrix otázky */
+    .sv_matrix .sv_matrix_table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
-    .sd-table tr:nth-child(even) {
+    .sv_matrix .sv_matrix_table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    /* Přizpůsobení dropdownů a inputů v matici – před označením opačná barva */
-    .sd-select {
+    .sv_matrix .sv_matrix_table select {
       background-color: #FFD84D !important;
-      color: #110453 !important;
-      border: 1px solid #FFD84D !important;
+      color: #110453;
+      border: none;
+      padding: 3px;
+      border-radius: 3px;
+      transition: background-color 0.3s;
     }
-    .sd-select:focus {
-      background-color: #0174DF !important;
-      color: #110453 !important;
-    }
-    /* Komentářové otázky – textarea má žluté pozadí, po aktivaci zelené */
-    .sv_q_comment textarea {
-      background-color: #FFD84D !important;
-      color: #110453 !important;
-      border: 1px solid #FFD84D !important;
-    }
-    .sv_q_comment textarea:focus {
+    .sv_matrix .sv_matrix_table select:focus {
       background-color: #00C837 !important;
-      color: #110453 !important;
     }
   </style>
 </head>
 <body>
   <div id="surveyElement"></div>
-
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
-
   <script>
-    // Nastavení lokalizace pro češtinu, upravená chybová hláška u povinných polí
-    Survey.surveyLocalization.locales.cs.requiredError = "Vyberte jednu z možností";
-    Survey.surveyLocalization.currentLocale = "cs";
-
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -131,7 +149,7 @@
               "name": "informedConsent",
               "html": {
                 "default": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Využití výsledků:</b> Výsledky tohoto výzkumu budou použity v mé bakalářské práci a mohou být publikovány v odborných časopisech nebo prezentovány na konferencích. Vždy však pouze v anonymizované podobě.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>",
-                "cs": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Využití výsledků:</b> Výsledky tohoto výzkumu budou použity v mé bakalářské práci a mohou být publikovány v odborných časopisech nebo prezentovány na konferencích. Vždy však pouze v anonymizované podobě.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>"
+                "cs": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>"
               }
             },
             {
@@ -139,7 +157,7 @@
               "name": "Souhlas",
               "title": "",
               "isRequired": true,
-              "requiredErrorText": "Vyberte jednu z možností",
+              "requiredErrorText": "Pro pokračování v dotazníku je nutné souhlasit s účastí ve výzkumu.",
               "choices": [
                 { "value": "Item 1", "text": "Souhlasím s účastí ve výzkumu" }
               ]
@@ -362,7 +380,7 @@
                 { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
                 { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
                 { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM (Early Start Denver Model)", "visibleIf": "{question14.esdm} notempty" },
+                { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
                 { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
                 { "value": "expresivni", "text": "Expresivní terapie", "visibleIf": "{question14.expresivni} notempty" },
                 { "value": "zvire", "text": "Terapie asistované zvířaty", "visibleIf": "{question14.zvire} notempty" },
@@ -440,12 +458,12 @@
               ],
               "horizontalScroll": true,
               "rows": [
-                { "value": "aba", "text": "ABA", "visibleIf": "{question14.aba} notempty" },
-                { "value": "kbt", "text": "KBT", "visibleIf": "{question14.kbt} notempty" },
+                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)", "visibleIf": "{question14.aba} notempty" },
+                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)", "visibleIf": "{question14.kbt} notempty" },
                 { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS", "visibleIf": "{question14.voks} notempty" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
                 { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
                 { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
                 { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
@@ -696,7 +714,7 @@
     };
 
     var survey = new Survey.Model(surveyJSON);
-
+    survey.requiredErrorText = "Vyberte jednu z možností";
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
       var url = "<?!= doPostUrl() ?>";
@@ -712,7 +730,6 @@
       var json = JSON.stringify(sender.data);
       xhr.send(json);
     });
-
     survey.render(document.getElementById("surveyElement"));
   </script>
 </body>

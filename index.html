@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.css" />
 
-  <!-- Vlastní font Open Sans -->
+  <!-- Font Open Sans -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
-  <!-- Vlastní CSS -->
+  <!-- Vlastní styly -->
   <style>
-    /* Celkové nastavení - modré pozadí, Open Sans, tmavý text */
+    /* Celkové pozadí, font a barva textu */
     html, body, .sv-root, .sv_main, .sv_container, .sv_body, .sd-body {
       background-color: #0174DF !important;
       margin: 0;
@@ -31,44 +31,36 @@
       border: none !important;
     }
 
-    /* Nastavení pro comment otázky */
-    .sv_q_comment, .sv_q--comment, .sd-question__comment {
+    /* Tlačítka navigace: základní stav žlutý, při hover/aktivaci zelený */
+    .sv-footer .sv-nav-btn, 
+    .sd-navigation__prev-btn, 
+    .sd-navigation__next-btn,
+    .sd-navigation__complete-btn, 
+    .sd-navigation__start-btn {
       background-color: #FFD84D !important;
-    }
-    .sv_q_comment textarea, .sv_q--comment textarea, .sd-question__comment textarea {
-      background-color: #0174DF !important;
-      color: #110453 !important;
-      border: 1px solid #0174DF !important;
-    }
-    .sv_q_comment textarea:focus, .sv_q--comment textarea:focus, .sd-question__comment textarea:focus {
-      background-color: #00C837 !important;
-      border-color: #00C837 !important;
-    }
-
-    /* Chybové hlášky */
-    .sv_q_error, .sv_q_required_text,
-    .sd-question__erbox, .sd-question__required-text {
-      color: #110453 !important;
-    }
-
-    /* Tlačítka – modrá s hover efekt */
-    .sv-footer .sv-nav-btn, .sd-navigation__prev-btn, .sd-navigation__next-btn,
-    .sd-navigation__complete-btn, .sd-navigation__start-btn {
-      background-color: #0174DF !important;
       color: #110453 !important;
       border: none !important;
     }
-    .sv-footer .sv-nav-btn:hover, .sd-navigation__prev-btn:hover, .sd-navigation__next-btn:hover,
-    .sd-navigation__complete-btn:hover, .sd-navigation__start-btn:hover,
-    .sv-footer .sv-nav-btn:active, .sd-navigation__prev-btn:active, .sd-navigation__next-btn:active,
-    .sd-navigation__complete-btn:active, .sd-navigation__start-btn:active,
-    .sv-footer .sv-nav-btn:focus, .sd-navigation__prev-btn:focus, .sd-navigation__next-btn:focus,
-    .sd-navigation__complete-btn:focus, .sd-navigation__start-btn:focus {
-      background-color: #FFD84D !important;
+    .sv-footer .sv-nav-btn:hover,
+    .sd-navigation__prev-btn:hover, 
+    .sd-navigation__next-btn:hover,
+    .sd-navigation__complete-btn:hover, 
+    .sd-navigation__start-btn:hover,
+    .sv-footer .sv-nav-btn:active,
+    .sd-navigation__prev-btn:active, 
+    .sd-navigation__next-btn:active,
+    .sd-navigation__complete-btn:active, 
+    .sd-navigation__start-btn:active,
+    .sv-footer .sv-nav-btn:focus,
+    .sd-navigation__prev-btn:focus, 
+    .sd-navigation__next-btn:focus,
+    .sd-navigation__complete-btn:focus, 
+    .sd-navigation__start-btn:focus {
+      background-color: #00C837 !important;
       color: #110453 !important;
     }
 
-    /* Checkboxy – nevybrané žluté, vybrané zelené */
+    /* Checkboxy – nezvolené žluté, zvolené zelené */
     .sv_q_checkbox_control label span input + .sv_q_checkbox,
     .sd-item .sd-checkbox__control,
     .sv_q_checkbox_control .sv_q_checkbox {
@@ -82,7 +74,7 @@
       border-color: #00C837 !important;
     }
 
-    /* Radiogroup – nevybrané žluté, vybrané zelené */
+    /* Radiogroup – nezvolené žluté, zvolené zelené */
     .sv_q_radiogroup_control label span input + .sv_q_radiogroup_button,
     .sd-item .sd-radio__control,
     .sv_q_radiogroup_control .sv_q_radiogroup_button {
@@ -96,8 +88,9 @@
       border-color: #00C837 !important;
     }
 
-    /* Rating – nevybrané žluté, vybrané zelené */
-    .sv_q_rating .sv-rating-item, .sd-rating .sd-item,
+    /* Rating – nezvolené žluté, zvolené zelené */
+    .sv_q_rating .sv-rating-item, 
+    .sd-rating .sd-item,
     .sd-item--selectable:not(.sd-item--selected).sd-rating__item {
       background-color: #FFD84D !important;
       border: 1px solid #FFD84D !important;
@@ -109,25 +102,56 @@
       border-color: #00C837 !important;
     }
 
-    /* Matrix – střídání řádků: liché řádky modré, sudé řádky žluté */
+    /* Comment: kontejner otázky žlutý, textové pole – základně modré, při fokusu zelené */
+    .sv_q_comment, .sv_q--comment, .sd-question__comment {
+      background-color: #FFD84D !important;
+    }
+    .sv_q_comment textarea, 
+    .sv_q--comment textarea, 
+    .sd-question__comment textarea {
+      background-color: #0174DF !important;
+      color: #110453 !important;
+      border: 1px solid #0174DF !important;
+    }
+    .sv_q_comment textarea:focus, 
+    .sv_q--comment textarea:focus, 
+    .sd-question__comment textarea:focus {
+      background-color: #00C837 !important;
+      border-color: #00C837 !important;
+    }
+
+    /* Matrix – zachování střídání řádků, ale interaktivní prvky uvnitř mají vlastní barevné schéma */
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
     .sd-table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    .sd-table tr:nth-child(odd) select,
-    .sd-table tr:nth-child(odd) .sv_q_radiogroup_button,
-    .sd-table tr:nth-child(odd) .sd-dropdown,
-    .sd-table tr:nth-child(odd) .sd-radio__control {
+    /* Přepsání stylu pro select a radiobuttony uvnitř matic – vždy nezvolené žluté, při fokusu/aktivaci zelené */
+    .sd-table select,
+    .sd-table .sv_q_radiogroup_button,
+    .sd-table .sd-dropdown,
+    .sd-table .sd-radio__control {
       background-color: #FFD84D !important;
       color: #110453 !important;
+      border: 1px solid #FFD84D !important;
     }
-    .sd-table tr:nth-child(even) select,
-    .sd-table tr:nth-child(even) .sv_q_radiogroup_button,
-    .sd-table tr:nth-child(even) .sd-dropdown,
-    .sd-table tr:nth-child(even) .sd-radio__control {
-      background-color: #0174DF !important;
+    .sd-table select:focus,
+    .sd-table select:active,
+    .sd-table .sv_q_radiogroup_button:focus,
+    .sd-table .sv_q_radiogroup_button:active,
+    .sd-table .sd-dropdown:focus,
+    .sd-table .sd-dropdown:active,
+    .sd-table .sd-radio__control:focus,
+    .sd-table .sd-radio__control:active {
+      background-color: #00C837 !important;
+      color: #110453 !important;
+      border: 1px solid #00C837 !important;
+    }
+
+    /* Chybové hlášky */
+    .sv_q_error, .sv_q_required_text,
+    .sd-question__erbox, .sd-question__required-text {
       color: #110453 !important;
     }
   </style>
@@ -137,7 +161,7 @@
   <!-- Kontejner pro dotazník -->
   <div id="surveyElement"></div>
 
-  <!-- Definice doPostUrl (případně upravte dle Vašeho endpointu) -->
+  <!-- Funkce doPostUrl – upravte dle svého endpointu -->
   <script>
     function doPostUrl() {
       return "https://example.com/myEndpoint";
@@ -500,7 +524,7 @@
                 { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS", "visibleIf": "{question14.voks} notempty" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
                 { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
                 { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
                 { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
@@ -511,11 +535,11 @@
                 { "value": "snoezelen", "text": "Snoezelen", "visibleIf": "{question14.snoezelen} notempty" },
                 { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
                 { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
-                { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
+                { "value": "auditivni", "text": "Auditivní intervence (JIAS, Tomatis, Benaudira)", "visibleIf": "{question14.auditivni} notempty" },
+                { "value": "esdm", "text": "ESDM (Early Start Denver Model)", "visibleIf": "{question14.esdm} notempty" },
                 { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
-                { "value": "expresivni", "text": "Expresivní terapie", "visibleIf": "{question14.expresivni} notempty" },
-                { "value": "zvire", "text": "Terapie asistované zvířaty", "visibleIf": "{question14.zvire} notempty" },
+                { "value": "expresivni", "text": "Expresivní terapie (Muzikoterapie, Arteterapie, Dramaterapie, Taneční a pohybová terapie)", "visibleIf": "{question14.expresivni} notempty" },
+                { "value": "zvire", "text": "Terapie asistované zvířaty (Canisterapie, Hipoterapie, Delfínoterapie)", "visibleIf": "{question14.zvire} notempty" },
                 { "value": "lego", "text": "Lego terapie", "visibleIf": "{question14.lego} notempty" },
                 { "value": "neurofeedback", "text": "Neurofeedback", "visibleIf": "{question14.neurofeedback} notempty" },
                 { "value": "kranio", "text": "Kraniosakrální terapie", "visibleIf": "{question14.kranio} notempty" },
@@ -802,7 +826,6 @@
       xhr.send(json);
     });
 
-    // Opravené vykreslení – předává se DOM element
     survey.render(document.getElementById("surveyElement"));
   </script>
 

@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
-  
-  <!-- SurveyJS styly -->
+
+  <!-- Knihovny SurveyJS -->
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.css" />
-  
-  <!-- Open Sans -->
+
+  <!-- Font Open Sans -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-  
-  <!-- Vlastní CSS -->
+
+  <!-- Vlastní styly -->
   <style>
-    /* Global: modré pozadí, Open Sans, tmavý text */
+    /* Celkové nastavení: modré pozadí, Open Sans, tmavý text */
     html, body, .sv-root, .sv_main, .sv_container, .sv_body, .sd-body {
       background-color: #0174DF !important;
       margin: 0;
@@ -22,7 +22,7 @@
       color: #110453 !important;
       font-family: 'Open Sans', sans-serif;
     }
-    .sv-title, .sv_page_title, .sv-question__title, .sv-question__description, 
+    .sv-title, .sv_page_title, .sv-question__title, .sv-question__description,
     .sd-title, .sd-description, .sv_header, .sv-description, .sv_p_description {
       color: #110453 !important;
     }
@@ -30,37 +30,37 @@
       background-color: #0174DF !important;
       border: none !important;
     }
-    
-    /* Navigační tlačítka: základ – žlutá (#FFD84D), hover/aktivace – zelená (#00C837) */
-    .sv-footer .sv-nav-btn, 
-    .sd-navigation__prev-btn, 
+
+    /* Navigační tlačítka – ve výchozím stavu žlutá (#FFD84D) a při hover/aktivaci zelená (#00C837) */
+    .sv-footer .sv-nav-btn,
+    .sd-navigation__prev-btn,
     .sd-navigation__next-btn,
-    .sd-navigation__complete-btn, 
+    .sd-navigation__complete-btn,
     .sd-navigation__start-btn {
       background-color: #FFD84D !important;
       color: #110453 !important;
       border: none !important;
     }
     .sv-footer .sv-nav-btn:hover,
-    .sd-navigation__prev-btn:hover, 
+    .sd-navigation__prev-btn:hover,
     .sd-navigation__next-btn:hover,
-    .sd-navigation__complete-btn:hover, 
+    .sd-navigation__complete-btn:hover,
     .sd-navigation__start-btn:hover,
     .sv-footer .sv-nav-btn:active,
-    .sd-navigation__prev-btn:active, 
+    .sd-navigation__prev-btn:active,
     .sd-navigation__next-btn:active,
-    .sd-navigation__complete-btn:active, 
+    .sd-navigation__complete-btn:active,
     .sd-navigation__start-btn:active,
     .sv-footer .sv-nav-btn:focus,
-    .sd-navigation__prev-btn:focus, 
+    .sd-navigation__prev-btn:focus,
     .sd-navigation__next-btn:focus,
-    .sd-navigation__complete-btn:focus, 
+    .sd-navigation__complete-btn:focus,
     .sd-navigation__start-btn:focus {
       background-color: #00C837 !important;
       color: #110453 !important;
     }
-    
-    /* Checkboxy: základ – žluté, vybrané – zelené */
+
+    /* Checkboxy – nezvolené: žlutá, vybrané: zelená */
     .sv_q_checkbox_control label span input + .sv_q_checkbox,
     .sd-item .sd-checkbox__control,
     .sv_q_checkbox_control .sv_q_checkbox {
@@ -73,8 +73,8 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Radiogroup: základ – žluté, vybrané – zelené */
+
+    /* Radiogroup – nezvolené: žlutá, vybrané: zelená */
     .sv_q_radiogroup_control label span input + .sv_q_radiogroup_button,
     .sd-item .sd-radio__control,
     .sv_q_radiogroup_control .sv_q_radiogroup_button {
@@ -87,9 +87,9 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Rating: základ – žluté, vybrané – zelené */
-    .sv_q_rating .sv-rating-item, 
+
+    /* Rating – nezvolené: žlutá, vybrané: zelená */
+    .sv_q_rating .sv-rating-item,
     .sd-rating .sd-item,
     .sd-item--selectable:not(.sd-item--selected).sd-rating__item {
       background-color: #FFD84D !important;
@@ -101,26 +101,26 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Comment (Textarea): kontejner žlutý, textové pole modré, focus zelené */
+
+    /* Comment – kontejner otázky: žlutý; textové pole: základně modré, při fokusu zelené */
     .sv_q_comment, .sv_q--comment, .sd-question__comment {
       background-color: #FFD84D !important;
     }
-    .sv_q_comment textarea, 
-    .sv_q--comment textarea, 
+    .sv_q_comment textarea,
+    .sv_q--comment textarea,
     .sd-question__comment textarea {
       background-color: #0174DF !important;
       color: #110453 !important;
       border: 1px solid #0174DF !important;
     }
-    .sv_q_comment textarea:focus, 
-    .sv_q--comment textarea:focus, 
+    .sv_q_comment textarea:focus,
+    .sv_q--comment textarea:focus,
     .sd-question__comment textarea:focus {
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Matrix: střídání řádků (liché modré, sudé žluté) a interaktivní prvky uvnitř */
+
+    /* Matrix – střídání řádků (liché: modrá, sudé: žlutá) a interaktivní prvky uvnitř */
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
@@ -147,18 +147,20 @@
       color: #110453 !important;
       border: 1px solid #00C837 !important;
     }
-    
-    /* Chybové hlášky: text "Vyberte jednu z možností" – tučně tmavě červeně */
-    .sv_q_error, .sv_q_required_text, .sd-question__erbox, .sd-question__required-text {
-      font-weight: bold !important;
+
+    /* Chybové hlášky a označení nevyplněných polí – tučně tmavě červeně (#8B0000) */
+    .sv_q_error, .sv_q_required_text,
+    .sd-question__erbox, .sd-question__required-text {
       color: #8B0000 !important;
+      font-weight: bold !important;
     }
-    
-    /* Označení chybových polí: pokud není vybrána povinná volba, aplikovat tmavě červený okraj */
-    .sv-question--required .sv_q_radiogroup_button,
-    .sv-question--required .sv_q_checkbox,
-    .sv-question--required .sv-rating-item,
-    .sv-question--required select {
+    /* Pokud je otázka v chybovém stavu, označíme také interaktivní prvky (checkboxy, radiobuttony, matrix) */
+    .sv_q_error .sv_q_radiogroup_control .sv_q_radiogroup_button,
+    .sv_q_error .sv_q_checkbox_control .sv_q_checkbox,
+    .sv_q_error .sd-table select,
+    .sv_q_error .sd-table .sv_q_radiogroup_button,
+    .sv_q_error .sd-table .sd-dropdown,
+    .sv_q_error .sd-table .sd-radio__control {
       border: 2px solid #8B0000 !important;
     }
   </style>
@@ -168,14 +170,14 @@
   <!-- Kontejner pro dotazník -->
   <div id="surveyElement"></div>
 
-  <!-- Funkce doPostUrl – upravte dle svého endpointu -->
+  <!-- Funkce doPostUrl – upravte dle Vašeho endpointu -->
   <script>
     function doPostUrl() {
       return "https://example.com/myEndpoint";
     }
   </script>
 
-  <!-- SurveyJS knihovny -->
+  <!-- Knihovny SurveyJS -->
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
 
@@ -431,8 +433,103 @@
                 { "value": "minulost", "text": "Využívali jsme v minulosti" }
               ],
               "rows": [
-                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)", "visibleIf": "{question14.aba} notempty" },
-                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)", "visibleIf": "{question14.kbt} notempty" },
+                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)" },
+                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)" },
+                { "value": "dir", "text": "DIR/Floortime" },
+                { "value": "sonrise", "text": "Son-Rise program" },
+                { "value": "logo", "text": "Logopedická terapie" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)" },
+                { "value": "makaton", "text": "Znakování do řeči a Makaton" },
+                { "value": "s2c", "text": "S2C (Hláskování)" },
+                { "value": "strukturovane", "text": "Strukturované učení" },
+                { "value": "socialni", "text": "Sociální příběhy" },
+                { "value": "ergo", "text": "Ergoterapie" },
+                { "value": "sensoricka", "text": "Senzorická integrace" },
+                { "value": "neurovyvoj", "text": "Neurovývojová terapie" },
+                { "value": "snoezelen", "text": "Snoezelen" },
+                { "value": "handle", "text": "HANDLE" },
+                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda" },
+                { "value": "auditivni", "text": "Auditivní intervence (JIAS, Tomatis, Benaudira)" },
+                { "value": "esdm", "text": "ESDM (Early Start Denver Model)" },
+                { "value": "ota_vti", "text": "O.T.A. a VTI" },
+                { "value": "expresivni", "text": "Expresivní terapie (Muzikoterapie, Arteterapie, Dramaterapie, Taneční a pohybová terapie)" },
+                { "value": "zvire", "text": "Terapie asistované zvířaty (Canisterapie, Hipoterapie, Delfínoterapie)" },
+                { "value": "lego", "text": "Lego terapie" },
+                { "value": "neurofeedback", "text": "Neurofeedback" },
+                { "value": "kranio", "text": "Kraniosakrální terapie" },
+                { "value": "mikroflora", "text": "Léčba střevní mikroflóry" },
+                { "value": "jine", "text": "Jiný typ" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "page4b",
+          "title": { "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (b)" },
+          "elements": [
+            {
+              "type": "html",
+              "name": "popis_prvni_casti",
+              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
+              "html": {
+                "default": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci v tabulce prosím odpovězte na následující otázky:</p><p style='margin-left: 20px;'><b>Čekací doba:</b> Jaká byla průměrná čekací doba na zahájení intervence?<br><b>Délka využívání:</b> Jak dlouho tuto metodu využíváte/jste využívali?<br><b>Intenzita (hodin týdně):</b> Jaká je/byla průměrná intenzita této intervence?</p>",
+                "cs": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci v tabulce prosím odpovězte na následující otázky:</p><br><p style='margin-left: 20px;'><b>Čekací doba:</b> Jaká byla průměrná čekací doba na zahájení intervence?<br><b>Délka využívání:</b> Jak dlouho tuto metodu využíváte/jste využívali?<br><b>Intenzita (hodin týdně):</b> Jaká je/byla průměrná intenzita této intervence?</p>"
+              }
+            },
+            {
+              "type": "matrixdropdown",
+              "name": "question15",
+              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
+              "title": {
+                "default": "Hodnocení intervenčních metod",
+                "cs": "Hodnocení intervenčních metod - První část:"
+              },
+              "isRequired": true,
+              "commentText": { "cs": "Zde napište jiný typ intervence" },
+              "columnMinWidth": "120px",
+              "alternateRows": true,
+              "columns": [
+                {
+                  "name": "cekaci_doba",
+                  "title": "Čekací doba",
+                  "cellType": "dropdown",
+                  "choices": [
+                    { "value": "mene_hodina", "text": "Méně než 1 měsíc" },
+                    { "value": "1-3_mesice", "text": "1-3 měsíce" },
+                    { "value": "3-6_mesicu", "text": "3-6 měsíců" },
+                    { "value": "6-12_mesicu", "text": "6-12 měsíců" },
+                    { "value": "vic_rok", "text": "Více než rok" }
+                  ]
+                },
+                {
+                  "name": "delka_vyuziti",
+                  "title": "Délka využívání",
+                  "cellType": "dropdown",
+                  "choices": [
+                    { "value": "mene_6", "text": "Méně než 6 měsíců" },
+                    { "value": "6-12_mesicu", "text": "6-12 měsíců" },
+                    { "value": "1-2_roky", "text": "1-2 roky" },
+                    { "value": "2-5_let", "text": "2-5 let" },
+                    { "value": "vic_5", "text": "Více než 5 let" }
+                  ]
+                },
+                {
+                  "name": "intenzita",
+                  "title": "Intenzita",
+                  "cellType": "dropdown",
+                  "choices": [
+                    { "value": "mene_hodina", "text": "Méně než 1 hodina" },
+                    { "value": "1-2_hodiny", "text": "1-2 hodiny" },
+                    { "value": "3-5_hodin", "text": "3-5 hodin" },
+                    { "value": "6-10_hodin", "text": "6-10 hodin" },
+                    { "value": "vic_10", "text": "Více než 10 hodin" }
+                  ]
+                }
+              ],
+              "horizontalScroll": true,
+              "rows": [
+                { "value": "aba", "text": "ABA", "visibleIf": "{question14.aba} notempty" },
+                { "value": "kbt", "text": "KBT", "visibleIf": "{question14.kbt} notempty" },
                 { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
@@ -738,6 +835,7 @@
       xhr.send(json);
     });
 
+    // Vykreslení dotazníku – předáváme DOM element
     survey.render(document.getElementById("surveyElement"));
   </script>
 

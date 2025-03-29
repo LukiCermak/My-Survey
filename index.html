@@ -13,6 +13,7 @@
       margin: 0;
       padding: 0;
     }
+    /* Základní styly SurveyJS – všechny stránky mají jednotné modré pozadí */
     .sv_main, .sv_container, .sv_page {
       background-color: #0174DF !important;
     }
@@ -24,6 +25,7 @@
     .sv_q_textarea {
       font-family: 'Open Sans', sans-serif;
     }
+    /* Tlačítka – základní barva a změna při hover/active */
     .sv_nav_btn {
       background-color: #0174DF !important;
       color: #110453 !important;
@@ -34,7 +36,7 @@
     .sv_nav_btn:hover, .sv_nav_btn:active {
       background-color: #FFD84D !important;
     }
-    /* Checkbox a radiogroup pro hlavní dotazy */
+    /* Checkboxy a radiogroup – základní žlutá a po označení zelená */
     .sv_q_checkbox_control input[type="checkbox"] {
       accent-color: #FFD84D;
     }
@@ -47,7 +49,7 @@
     .sv_q_radiogroup_control input[type="radio"]:checked {
       accent-color: #00C837;
     }
-    /* Rating */
+    /* Rating – žluté tlačítka, po výběru zelené */
     .sv_q_rating .sv_q_rating_item {
       background-color: #FFD84D;
       border: 1px solid #0174DF;
@@ -56,7 +58,7 @@
     .sv_q_rating .sv_q_rating_item.selected {
       background-color: #00C837;
     }
-    /* Textové otázky – pozadí dotazníku zůstává modré, ale textové vstupy */
+    /* Textové otázky – vstupní pole mají žluté pozadí, po vyplnění zelené */
     .sv_q_text_root {
       background-color: #FFD84D;
       padding: 10px;
@@ -71,14 +73,14 @@
     .sv_q_text:valid, .sv_q_textarea:valid {
       background-color: #00C837;
     }
-    /* Matrix – střídání řádků */
+    /* Matrix – střídání řádků: liché řádky modré, sudé žluté */
     .sv_matrix .sv_matrix_row:nth-child(odd) {
       background-color: #0174DF;
     }
     .sv_matrix .sv_matrix_row:nth-child(even) {
       background-color: #FFD84D;
     }
-    /* Dropdowny v matici */
+    /* Dropdowny v matici – kombinace barev podle požadavku */
     .sv_matrix .sv_q_dropdown_control select {
       background-color: #FFD84D;
       border: 1px solid #0174DF;
@@ -89,7 +91,7 @@
     .sv_matrix .sv_q_dropdown_control select:valid {
       background-color: #0174DF;
     }
-    /* Radiogroup v matici – jednoduché nastavení accent-color */
+    /* Radiogroup v matici – základní žlutá, po označení modrá */
     .sv_matrix .sv_q_radiogroup_control input[type="radio"] {
       accent-color: #FFD84D;
     }
@@ -100,10 +102,15 @@
 </head>
 <body>
   <div id="surveyElement"></div>
+
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
   <script>
-    // Nastavení lokalizace chybové hlášky
+    // Zajištění existence lokalizace pro češtinu před nastavením vlastností
+    if (!Survey.surveyLocalization.locales["cs"]) {
+      Survey.surveyLocalization.locales["cs"] = {};
+    }
+    Survey.surveyLocalization.defaultLocale = "cs";
     Survey.surveyLocalization.locales["cs"].requiredError = "Vyberte jednu z možností";
 
     var surveyJSON = {
@@ -284,13 +291,13 @@
               "name": "question9",
               "title": { "cs": "Má vaše dítě odborně diagnostikovánu některou z následujících přidružených zdravotních nebo psychických obtíží?" },
               "choices": [
-                "ADHD/ADD (porucha pozornosti s hyperaktivitou) ",
+                "ADHD/ADD (porucha pozornosti s hyperaktivitou)",
                 "Intelektové postižení (mentální retardace – LMR, SMR, TMR, HMR)",
                 "Narušení komunikační schopnosti (vývojová dysfázie)",
-                "Úzkostné poruchy (např. generalizovaná úzkostná porucha, fobie) ",
+                "Úzkostné poruchy (např. generalizovaná úzkostná porucha, fobie)",
                 "Poruchy spánku (např. nespavost, narušený spánkový režim)",
                 "Gastrointestinální poruchy (např. chronická zácpa, syndrom dráždivého tračníku)",
-                "Epilepsie (záchvatové onemocnění) ",
+                "Epilepsie (záchvatové onemocnění)",
                 "Smyslové poruchy (např. zrakové, sluchové postižení)",
                 "Specifické poruchy učení (např. dyspraxie, dyslexie, dysgrafie)",
                 "Poruchy příjmu potravy (např. anorexie, bulimie)"

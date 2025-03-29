@@ -5,113 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
+      background-color: #0174DF !important;
       font-family: 'Open Sans', sans-serif;
-      background-color: #0174DF !important;
       color: #110453;
+      margin: 0;
+      padding: 0;
     }
-    .sd-survey,
-    .sd-page,
-    .sd-container,
-    .sd-header,
-    .sd-footer {
+    /* Celý kontejner SurveyJS */
+    .sv_main, .sv_container, .sv_body_container {
       background-color: #0174DF !important;
     }
-    /* Tlačítka */
-    .sv_nav_btn,
-    .sd-btn {
-      background-color: #FFD84D !important;
+    /* Přizpůsobení tlačítek – normálně modrá, při hover/aktivaci žlutá, text tmavě fialový */
+    button, .sv_btn, .sv_nav_btn {
+      background-color: #0174DF !important;
       color: #110453 !important;
       border: none;
-      transition: background-color 0.3s;
+      cursor: pointer;
     }
-    .sv_nav_btn:hover,
-    .sd-btn:hover {
-      background-color: #00C837 !important;
+    button:hover, .sv_btn:hover, .sv_nav_btn:hover,
+    button:active, .sv_btn:active, .sv_nav_btn:active {
+      background-color: #FFD84D !important;
+      color: #110453 !important;
     }
-    /* Globální nastavení chybové hlášky */
+    /* Chybová hláška – upravena výchozí zpráva */
     .sv_q_required_text {
-      font-style: normal;
+      color: red;
     }
-    /* Checkboxy */
-    .sv_q_checkbox_control .sv_q_checkbox_label {
+    /* Checkboxy a radiogroup – nezaškrtnuté žluté, po označení zelené */
+    .sv_q_checkbox_control, .sv_q_radiogroup_control {
       background-color: #FFD84D !important;
-      color: #110453;
-      padding: 5px;
-      border-radius: 3px;
-      transition: background-color 0.3s;
+      border-color: #FFD84D !important;
     }
-    .sv_q_checkbox_control input[type="checkbox"]:checked + label {
+    .sv_q_checkbox_control input:checked + label,
+    .sv_q_radiogroup_control input:checked + label {
       background-color: #00C837 !important;
+      border-color: #00C837 !important;
     }
-    /* Radiogroup */
-    .sv_q_radiogroup_control label {
+    /* Rating – nezaškrtnuté žluté, označené zelené */
+    .sv_q_rating_item, .sv_q_rating_item:hover, .sv_q_rating_item:active {
       background-color: #FFD84D !important;
-      color: #110453;
-      padding: 5px;
-      border-radius: 3px;
-      transition: background-color 0.3s;
+      color: #110453 !important;
+      border-color: #FFD84D !important;
     }
-    .sv_q_radiogroup_control input[type="radio"]:checked + label {
+    .sv_q_rating_item.sv_q_rating_item--selected {
       background-color: #00C837 !important;
+      color: #110453 !important;
+      border-color: #00C837 !important;
     }
-    /* Rating */
-    .sv_q_rating {
-      background-color: transparent;
-    }
-    .sv_q_rating .sv_q_radiogroup_item {
-      background-color: #FFD84D !important;
-      color: #110453;
-      border-radius: 3px;
-      transition: background-color 0.3s;
-    }
-    .sv_q_rating .sv_q_radiogroup_item input[type="radio"]:checked + label {
-      background-color: #00C837 !important;
-    }
-    /* Comment - stránka s komentářem */
-    .sv_q_comment {
-      background-color: #FFD84D !important;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .sv_q_comment_textarea textarea {
-      background-color: #0174DF !important;
-      color: #110453;
-      padding: 5px;
-      border: 1px solid #110453;
-      border-radius: 3px;
-      transition: background-color 0.3s;
-    }
-    .sv_q_comment_textarea textarea.filled {
-      background-color: #00C837 !important;
-    }
-    /* Matrix - alternující řádky */
+    /* Alternující řádky v matici – liché: modrá, sudé: žlutá */
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
     .sd-table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    .sd-table select {
+    /* Přizpůsobení dropdownů a inputů v matici – před označením opačná barva */
+    .sd-select {
       background-color: #FFD84D !important;
-      color: #110453;
-      border: none;
-      padding: 3px;
-      border-radius: 3px;
-      transition: background-color 0.3s;
+      color: #110453 !important;
+      border: 1px solid #FFD84D !important;
     }
-    .sd-table select:focus {
+    .sd-select:focus {
+      background-color: #0174DF !important;
+      color: #110453 !important;
+    }
+    /* Komentářové otázky – textarea má žluté pozadí, po aktivaci zelené */
+    .sv_q_comment textarea {
+      background-color: #FFD84D !important;
+      color: #110453 !important;
+      border: 1px solid #FFD84D !important;
+    }
+    .sv_q_comment textarea:focus {
       background-color: #00C837 !important;
+      color: #110453 !important;
     }
   </style>
 </head>
 <body>
   <div id="surveyElement"></div>
+
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
+
   <script>
+    // Nastavení lokalizace pro češtinu, upravená chybová hláška u povinných polí
+    Survey.surveyLocalization.locales.cs.requiredError = "Vyberte jednu z možností";
+    Survey.surveyLocalization.currentLocale = "cs";
+
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -155,7 +139,7 @@
               "name": "Souhlas",
               "title": "",
               "isRequired": true,
-              "requiredErrorText": "Pro pokračování v dotazníku je nutné souhlasit s účastí ve výzkumu.",
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": "Souhlasím s účastí ve výzkumu" }
               ]
@@ -378,7 +362,7 @@
                 { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
                 { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
                 { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
+                { "value": "esdm", "text": "ESDM (Early Start Denver Model)", "visibleIf": "{question14.esdm} notempty" },
                 { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
                 { "value": "expresivni", "text": "Expresivní terapie", "visibleIf": "{question14.expresivni} notempty" },
                 { "value": "zvire", "text": "Terapie asistované zvířaty", "visibleIf": "{question14.zvire} notempty" },
@@ -712,7 +696,7 @@
     };
 
     var survey = new Survey.Model(surveyJSON);
-    survey.requiredErrorText = "Vyberte jednu z možností";
+
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
       var url = "<?!= doPostUrl() ?>";
@@ -728,6 +712,7 @@
       var json = JSON.stringify(sender.data);
       xhr.send(json);
     });
+
     survey.render(document.getElementById("surveyElement"));
   </script>
 </body>

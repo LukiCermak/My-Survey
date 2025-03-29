@@ -14,23 +14,27 @@
       margin: 0;
       padding: 0;
     }
-    /* Přepsání pozadí hlavních kontejnerů SurveyJS */
-    .sv_main, 
-    .sv_body_container, 
-    .sv_container, 
-    .sv_page, 
-    .sv_header, 
+    /* Přepsání kontejnerů dotazníku – všechny stránky, panely, kontejnery atd. budou mít jednotné pozadí */
+    .sv_main,
+    .sv_container,
+    .sv_body_container,
+    .sv_page,
+    .sv_page_container,
+    .sv_panel,
+    .sv_header,
     .sv_footer {
       background-color: #0174DF !important;
     }
-    /* Tlačítka - základní: žlutá, při hover/aktivaci: zelená */
-    .sv_nav_btn, .sd-btn {
+    /* Tlačítka (navigační, spouštěcí) – základní žlutá, při hover/aktivaci zelená */
+    .sv_nav_btn,
+    .sv_btn {
       background-color: #FFD84D !important;
       color: #110453 !important;
       border: none;
       transition: background-color 0.3s;
     }
-    .sv_nav_btn:hover, .sd-btn:hover {
+    .sv_nav_btn:hover,
+    .sv_btn:hover {
       background-color: #00C837 !important;
     }
     /* Globální nastavení chybové hlášky */
@@ -72,7 +76,7 @@
     .sv_q_rating .sv_q_radiogroup_item input[type="radio"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Comment - stránka s komentářem */
+    /* Comment – box pro komentář */
     .sv_q_comment {
       background-color: #FFD84D !important;
       padding: 10px;
@@ -89,14 +93,14 @@
     .sv_q_comment_textarea textarea.filled {
       background-color: #00C837 !important;
     }
-    /* Matrix - střídání řádků; využíváme třídy SurveyJS pro matrix otázky */
-    .sv_matrix .sv_matrix_table tr:nth-child(odd) {
+    /* Matrix – alternativní řádkování; pro SurveyJS v2 se používá třída sv_matrix_table */
+    .sv_matrix_table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
-    .sv_matrix .sv_matrix_table tr:nth-child(even) {
+    .sv_matrix_table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    .sv_matrix .sv_matrix_table select {
+    .sv_matrix select {
       background-color: #FFD84D !important;
       color: #110453;
       border: none;
@@ -104,7 +108,7 @@
       border-radius: 3px;
       transition: background-color 0.3s;
     }
-    .sv_matrix .sv_matrix_table select:focus {
+    .sv_matrix select:focus {
       background-color: #00C837 !important;
     }
   </style>
@@ -458,12 +462,12 @@
               ],
               "horizontalScroll": true,
               "rows": [
-                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)", "visibleIf": "{question14.aba} notempty" },
-                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)", "visibleIf": "{question14.kbt} notempty" },
+                { "value": "aba", "text": "ABA", "visibleIf": "{question14.aba} notempty" },
+                { "value": "kbt", "text": "KBT", "visibleIf": "{question14.kbt} notempty" },
                 { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
+                { "value": "voks", "text": "VOKS", "visibleIf": "{question14.voks} notempty" },
                 { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
                 { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
                 { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },

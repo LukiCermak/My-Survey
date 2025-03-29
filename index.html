@@ -4,10 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
+  <!-- Místo standardního "survey-core.min.css" použijeme contrast.css -->
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/contrast.css" type="text/css">
   <style>
+    /* Nastavíme libovolnou barvu pozadí pro celé tělo */
     body {
+      margin: 0;
+      padding: 0;
       background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+    }
+    /* Překryjeme pozadí dotazníku, aby bylo také světlé */
+    .sv_main.sv_contrast_theme {
+      background-color: #f0f8ff !important;
+    }
+    .sv_main.sv_contrast_theme .sv_body {
+      background-color: #f0f8ff !important;
     }
   </style>
 </head>
@@ -16,10 +28,7 @@
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
   <script>
-    // Přepsání proměnné tématu pro pozadí
-    Survey.StylesManager.ThemeColors["contrast"]["--sjs-body-backcolor"] = "#f0f8ff";
     Survey.StylesManager.applyTheme("contrast");
-
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -55,7 +64,7 @@
               "name": "informedConsent",
               "html": {
                 "default": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Využití výsledků:</b> Výsledky tohoto výzkumu budou použity v mé bakalářské práci a mohou být publikovány v odborných časopisech nebo prezentovány na konferencích. Vždy však pouze v anonymizované podobě.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>",
-                "cs": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>"
+                "cs": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Využití výsledků:</b> Výsledky tohoto výzkumu budou použity v mé bakalářské práci a mohou být publikovány v odborných časopisech nebo prezentovány na konferencích. Vždy však pouze v anonymizované podobě.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>"
               }
             },
             {

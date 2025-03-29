@@ -30,36 +30,36 @@
       background-color: #0174DF !important;
       border: none !important;
     }
-    
-    /* Tlačítka (Zpět, Další, Začít, Odeslat): nezvolené = žlutá (#FFD84D), hover/aktivace = zelená (#00C837) */
-    .sv-footer .sv-nav-btn, 
-    .sd-navigation__prev-btn, 
+
+    /* Navigační tlačítka: základní stav – žlutá; hover/aktivace – zelená */
+    .sv-footer .sv-nav-btn,
+    .sd-navigation__prev-btn,
     .sd-navigation__next-btn,
-    .sd-navigation__complete-btn, 
+    .sd-navigation__complete-btn,
     .sd-navigation__start-btn {
       background-color: #FFD84D !important;
       color: #110453 !important;
       border: none !important;
     }
     .sv-footer .sv-nav-btn:hover,
-    .sd-navigation__prev-btn:hover, 
+    .sd-navigation__prev-btn:hover,
     .sd-navigation__next-btn:hover,
-    .sd-navigation__complete-btn:hover, 
+    .sd-navigation__complete-btn:hover,
     .sd-navigation__start-btn:hover,
     .sv-footer .sv-nav-btn:active,
-    .sd-navigation__prev-btn:active, 
+    .sd-navigation__prev-btn:active,
     .sd-navigation__next-btn:active,
-    .sd-navigation__complete-btn:active, 
+    .sd-navigation__complete-btn:active,
     .sd-navigation__start-btn:active,
     .sv-footer .sv-nav-btn:focus,
-    .sd-navigation__prev-btn:focus, 
+    .sd-navigation__prev-btn:focus,
     .sd-navigation__next-btn:focus,
-    .sd-navigation__complete-btn:focus, 
+    .sd-navigation__complete-btn:focus,
     .sd-navigation__start-btn:focus {
       background-color: #00C837 !important;
       color: #110453 !important;
     }
-    
+
     /* Checkboxy – základní stav žlutý, vybrané zelené */
     .sv_q_checkbox_control label span input + .sv_q_checkbox,
     .sd-item .sd-checkbox__control,
@@ -73,7 +73,7 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
+
     /* Radiogroup – základní stav žlutý, vybrané zelené */
     .sv_q_radiogroup_control label span input + .sv_q_radiogroup_button,
     .sd-item .sd-radio__control,
@@ -87,9 +87,9 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Rating – základní stav žlutý, vybrané zelené */
-    .sv_q_rating .sv-rating-item, 
+
+    /* Rating – základní stav žlutý, vybrané zelené; žádná přednastavená hodnota */
+    .sv_q_rating .sv-rating-item,
     .sd-rating .sd-item,
     .sd-item--selectable:not(.sd-item--selected).sd-rating__item {
       background-color: #FFD84D !important;
@@ -101,26 +101,26 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Comment – kontejner otázky žlutý; textové pole – modré, při fokusu zelené */
+
+    /* Comment – kontejner otázky: základní stav žlutý; textové pole: základně modré, při fokusu zelené */
     .sv_q_comment, .sv_q--comment, .sd-question__comment {
       background-color: #FFD84D !important;
     }
-    .sv_q_comment textarea, 
-    .sv_q--comment textarea, 
+    .sv_q_comment textarea,
+    .sv_q--comment textarea,
     .sd-question__comment textarea {
       background-color: #0174DF !important;
       color: #110453 !important;
       border: 1px solid #0174DF !important;
     }
-    .sv_q_comment textarea:focus, 
-    .sv_q--comment textarea:focus, 
+    .sv_q_comment textarea:focus,
+    .sv_q--comment textarea:focus,
     .sd-question__comment textarea:focus {
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-    
-    /* Matrix – střídání řádků: liché řádky modré, sudé řádky žluté; interaktivní prvky uvnitř mají odpovídající barevné schéma */
+
+    /* Matrix – střídání řádků; interaktivní prvky uvnitř mají žlutou nezvolenou a zelenou vybranou barvu */
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
@@ -143,8 +143,8 @@
       color: #110453 !important;
       border: 1px solid #0174DF !important;
     }
-    
-    /* Chybové hlášky – text "Vyberte jednu z možností" apod. budou tučně a tmavě červené (#8B0000) */
+
+    /* Chybové hlášky – text "Vyberte jednu z možností" a chybové rámečky budou tučně a tmavě červené (#8B0000) */
     .sv_q_error, .sv_q_required_text {
       color: #8B0000 !important;
       font-weight: bold !important;
@@ -158,19 +158,24 @@
   </style>
 </head>
 <body>
+
+  <!-- Kontejner pro dotazník -->
   <div id="surveyElement"></div>
-  
-  <!-- Definice doPostUrl – upravte dle skutečného endpointu -->
+
+  <!-- Funkce doPostUrl – upravte dle svého endpointu -->
   <script>
     function doPostUrl() {
       return "https://example.com/myEndpoint";
     }
   </script>
-  
+
+  <!-- Knihovny SurveyJS -->
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
+
   <script>
     Survey.surveyStrings.requiredError = "Vyberte jednu z možností";
+
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -210,7 +215,7 @@
               "name": "informedConsent",
               "html": {
                 "default": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Využití výsledků:</b> Výsledky tohoto výzkumu budou použity v mé bakalářské práci a mohou být publikovány v odborných časopisech nebo prezentovány na konferencích. Vždy však pouze v anonymizované podobě.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>",
-                "cs": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>"
+                "cs": "<div style='text-align: left;'><p>INFORMOVANÝ SOUHLAS S ÚČASTÍ VE VÝZKUMU</p><br><p><b>Název výzkumného projektu:</b> Intervenční metody u dětí s poruchami autistického spektra (PAS) v ČR: Evaluace implementace, dostupnosti a efektivity z pohledu rodin a odborníků</p><p><b>Hlavní řešitel:</b> Lukáš Čermák, student Speciální pedagogiky, Pedagogická fakulta, Univerzita Hradec Králové</p><p><b>O co Vás žádám?</b> Vaše účast ve výzkumu spočívá ve vyplnění online dotazníku, který se zaměřuje na Vaše zkušenosti s různými intervenčními metodami, hodnocení jejich efektivity a dostupnosti, a identifikaci hlavních překážek v přístupu k intervencím.</p><p><b>Dobrovolnost účasti:</b> Vaše účast v tomto výzkumu je zcela dobrovolná. Můžete odmítnout účast nebo kdykoliv v průběhu vyplňování dotazníku svou účast ukončit bez jakýchkoliv negativních důsledků.</p><p><b>Důvěrnost a anonymita:</b> Veškeré informace, které poskytnete, budou považovány za důvěrné a budou použity pouze pro účely tohoto výzkumu. Data budou anonymizována a v žádném případě nebudou spojována s Vaší osobou či Vaším dítětem.</p><p><b>Rizika a přínosy:</b> Účast v tomto výzkumu nepředstavuje žádná známá rizika. Vaše odpovědi významně přispějí k lepšímu porozumění situaci rodin dětí s PAS v ČR a mohou vést k návrhům na zlepšení systému péče.</p><p><b>Využití výsledků:</b> Výsledky tohoto výzkumu budou použity v mé bakalářské práci a mohou být publikovány v odborných časopisech nebo prezentovány na konferencích. Vždy však pouze v anonymizované podobě.</p><p><b>Kontakt pro další informace:</b> V případě jakýchkoliv dotazů ohledně tohoto výzkumu mě můžete kontaktovat na emailu: <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a></p><p><b><br>Souhlas s účastí ve výzkumu:<br></b> Zaškrtnutím políčka níže potvrzujete, že:</p><p style='padding-left: 30px;'>&bull; Jste si přečetl/a výše uvedené informace<br>&bull; Dobrovolně souhlasíte s účastí v tomto výzkumu<br>&bull; Jste rodičem nebo zákonným zástupcem dítěte s diagnostikovanou poruchou autistického spektra či podezřením na PAS<br>&bull; Souhlasíte s použitím anonymizovaných dat pro účely výzkumu a publikace</p></div>"
               }
             },
             {
@@ -220,7 +225,10 @@
               "isRequired": true,
               "requiredErrorText": "Pro pokračování v dotazníku je nutné souhlasit s účastí ve výzkumu.",
               "choices": [
-                { "value": "Item 1", "text": "Souhlasím s účastí ve výzkumu" }
+                {
+                  "value": "Item 1",
+                  "text": "Souhlasím s účastí ve výzkumu"
+                }
               ]
             }
           ]
@@ -232,24 +240,63 @@
             {
               "type": "radiogroup",
               "name": "question1",
-              "title": { "cs": "Kolik dětí máte celkem ve vaší rodině?" },
+              "title": {
+                "cs": "Kolik dětí máte celkem ve vaší rodině?"
+              },
               "isRequired": true,
               "choices": [
-                { "value": "Item 1", "text": { "cs": "1 dítě" } },
-                { "value": "Item 2", "text": { "cs": "2 děti" } },
-                { "value": "Item 3", "text": { "cs": "3 děti" } },
-                { "value": "Item 4", "text": { "cs": "4 a více dětí" } }
+                {
+                  "value": "Item 1",
+                  "text": {
+                    "cs": "1 dítě"
+                  }
+                },
+                {
+                  "value": "Item 2",
+                  "text": {
+                    "cs": "2 děti"
+                  }
+                },
+                {
+                  "value": "Item 3",
+                  "text": {
+                    "cs": "3 děti"
+                  }
+                },
+                {
+                  "value": "Item 4",
+                  "text": {
+                    "cs": "4 a více dětí"
+                  }
+                }
               ]
             },
             {
               "type": "radiogroup",
               "name": "question2",
-              "title": { "cs": "Kolik z vašich dětí má diagnostikovanou poruchu autistického spektra (PAS)?" },
+              "title": {
+                "cs": "Kolik z vašich dětí má diagnostikovanou poruchu autistického spektra (PAS)?"
+              },
               "isRequired": true,
               "choices": [
-                { "value": "Item 1", "text": { "cs": "1 dítě" } },
-                { "value": "Item 2", "text": { "cs": "2 děti" } },
-                { "value": "Item 3", "text": { "cs": "3 a více dětí" } }
+                {
+                  "value": "Item 1",
+                  "text": {
+                    "cs": "1 dítě"
+                  }
+                },
+                {
+                  "value": "Item 2",
+                  "text": {
+                    "cs": "2 děti"
+                  }
+                },
+                {
+                  "value": "Item 3",
+                  "text": {
+                    "cs": "3 a více dětí"
+                  }
+                }
               ]
             },
             {
@@ -261,7 +308,9 @@
             {
               "type": "radiogroup",
               "name": "question3",
-              "title": { "cs": "Věk dítěte s PAS" },
+              "title": {
+                "cs": "Věk dítěte s PAS"
+              },
               "isRequired": true,
               "choices": [
                 "1-3 roky",
@@ -274,14 +323,22 @@
             {
               "type": "radiogroup",
               "name": "question4",
-              "title": { "cs": "Pohlaví dítěte" },
+              "title": {
+                "cs": "Pohlaví dítěte"
+              },
               "isRequired": true,
-              "choices": [ "Chlapec", "Dívka", "Jiné" ]
+              "choices": [
+                "Chlapec",
+                "Dívka",
+                "Jiné"
+              ]
             },
             {
               "type": "dropdown",
               "name": "question5",
-              "title": { "cs": "V jakém kraji bydlíte?" },
+              "title": {
+                "cs": "V jakém kraji bydlíte?"
+              },
               "isRequired": true,
               "choices": [
                 "Hlavní město Praha",
@@ -303,7 +360,9 @@
             {
               "type": "radiogroup",
               "name": "question6",
-              "title": { "cs": "V jakém věku byl Vašemu dítěti diagnostikován PAS?" },
+              "title": {
+                "cs": "V jakém věku byl Vašemu dítěti diagnostikován PAS?"
+              },
               "isRequired": true,
               "choices": [
                 "1-3 let",
@@ -317,7 +376,9 @@
             {
               "type": "radiogroup",
               "name": "question7",
-              "title": { "cs": "Typ diagnózy PAS" },
+              "title": {
+                "cs": "Typ diagnózy PAS"
+              },
               "isRequired": true,
               "choices": [
                 "Dětský autismus",
@@ -330,7 +391,9 @@
             {
               "type": "radiogroup",
               "name": "question8",
-              "title": { "cs": "Jaký stupeň příspěvku na péči pobírá vaše dítě s PAS?" },
+              "title": {
+                "cs": "Jaký stupeň příspěvku na péči pobírá vaše dítě s PAS?"
+              },
               "choices": [
                 "I.stupeň (lehká závislost)",
                 "II.stupeň (středně těžká závislost)",
@@ -344,7 +407,9 @@
             {
               "type": "checkbox",
               "name": "question9",
-              "title": { "cs": "Má vaše dítě odborně diagnostikovánu některou z následujících přidružených zdravotních nebo psychických obtíží?" },
+              "title": {
+                "cs": "Má vaše dítě odborně diagnostikovánu některou z následujících přidružených zdravotních nebo psychických obtíží?"
+              },
               "choices": [
                 "ADHD/ADD (porucha pozornosti s hyperaktivitou) ",
                 "Intelektové postižení (mentální retardace – LMR, SMR, TMR, HMR)",
@@ -355,7 +420,7 @@
                 "Epilepsie (záchvatové onemocnění) ",
                 "Smyslové poruchy (např. zrakové, sluchové postižení)",
                 "Specifické poruchy učení (např. dyspraxie, dyslexie, dysgrafie)",
-                "Poruchy příjmu potravy (např. anorexie, bulimie) "
+                "Poruchy příjmu potravy (např. anorexie, bulimie)"
               ],
               "showOtherItem": true
             }
@@ -368,12 +433,16 @@
             {
               "type": "text",
               "name": "question10",
-              "title": { "cs": "Co je podle vás nejtěžší při péči o dítě s PAS v ČR?" }
+              "title": {
+                "cs": "Co je podle vás nejtěžší při péči o dítě s PAS v ČR?"
+              }
             },
             {
               "type": "text",
               "name": "question11",
-              "title": { "cs": "Co by se podle vás mělo změnit, aby byla pomoc pro děti s PAS dostupnější a lepší?" }
+              "title": {
+                "cs": "Co by se podle vás mělo změnit, aby byla pomoc pro děti s PAS dostupnější a lepší?"
+              }
             }
           ]
         },
@@ -381,13 +450,15 @@
           "name": "page4a",
           "title": {
             "default": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení ",
-            "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (a) "
+            "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (a)"
           },
           "elements": [
             {
               "type": "radiogroup",
               "name": "question12",
-              "title": { "cs": "V jakém věku vašeho dítěte jste začali využívat první odbornou podporu, terapii nebo speciální vzdělávací přístup pro děti s PAS?" },
+              "title": {
+                "cs": "V jakém věku vašeho dítěte jste začali využívat první odbornou podporu, terapii nebo speciální vzdělávací přístup pro děti s PAS?"
+              },
               "isRequired": true,
               "choices": [
                 "1-3 roky",
@@ -401,7 +472,9 @@
               "type": "checkbox",
               "name": "question13",
               "visibleIf": "{question12} = 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Z jakého důvodu jste zatím nezačali využívat žádnou odbornou podporu nebo terapii?" },
+              "title": {
+                "cs": "Z jakého důvodu jste zatím nezačali využívat žádnou odbornou podporu nebo terapii?"
+              },
               "choices": [
                 "Čekáme na zahájení služeb",
                 "Nemáme dostatek informací o dostupných možnostech",
@@ -414,10 +487,14 @@
               "type": "matrix",
               "name": "question14",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "U každé z následujících intervenčních metod prosím označte, zda ji aktuálně využíváte nebo jste ji využívali v minulosti:" },
+              "title": {
+                "cs": "U každé z následujících intervenčních metod prosím označte, zda ji aktuálně využíváte nebo jste ji využívali v minulosti:"
+              },
               "isRequired": true,
               "showCommentArea": true,
-              "commentText": { "cs": "Zde uveďte o jaký typ intervence se jedná" },
+              "commentText": {
+                "cs": "Zde uveďte o jaký typ intervence se jedná"
+              },
               "alternateRows": true,
               "columns": [
                 { "value": "aktualne", "text": "Aktuálně využíváme" },
@@ -444,7 +521,7 @@
                 { "value": "esdm", "text": "ESDM (Early Start Denver Model)" },
                 { "value": "ota_vti", "text": "O.T.A. a VTI" },
                 { "value": "expresivni", "text": "Expresivní terapie (Muzikoterapie, Arteterapie, Dramaterapie, Taneční a pohybová terapie)" },
-                { "value": "zvire", "text": "Terapie asistované zvířaty" },
+                { "value": "zvire", "text": "Terapie asistované zvířaty (Canisterapie, Hipoterapie, Delfínoterapie)" },
                 { "value": "lego", "text": "Lego terapie" },
                 { "value": "neurofeedback", "text": "Neurofeedback" },
                 { "value": "kranio", "text": "Kraniosakrální terapie" },
@@ -456,24 +533,30 @@
         },
         {
           "name": "page4b",
-          "title": { "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (b)" },
+          "title": {
+            "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (b)"
+          },
           "elements": [
             {
               "type": "html",
               "name": "popis_druhe_casti",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "html": {
-                "default": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, vyplňte prosím následující tabulku. V každém sloupci odpovězte na následující otázky:</p><p style='margin-left: 20px;'><b>Míra zapojení:</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>Efektivita:</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>Oblasti pokroku:</b> V jakých oblastech jste zaznamenali největší pokrok?<br><b>Důvody využívání:</b> Jaké jsou hlavní důvody pro využívání této intervence?</p>",
-                "cs": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, vyplňte prosím následující tabulku. V každém sloupci odpovězte na následující otázky:</p><br><p style='margin-left: 20px;'><b>Míra zapojení:</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>Efektivita:</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>Oblasti pokroku:</b> V jakých oblastech jste zaznamenali největší pokrok?<br><b>Důvody využívání:</b> Jaké jsou hlavní důvody pro využívání této intervence?</p>"
+                "default": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci prosím odpovězte na následující otázky:</p><p style='margin-left: 20px;'><b>Míra zapojení:</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>Efektivita:</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>Oblasti pokroku:</b> V jakých oblastech jste zaznamenali největší pokrok díky této intervenci?<br><b>Důvody využívání:</b> Jaké jsou/byly hlavní důvody pro využívání této intervence?</p>",
+                "cs": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci prosím odpovězte na následující otázky:</p><br><p style='margin-left: 20px;'><b>Míra zapojení:</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>Efektivita:</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>Oblasti pokroku:</b> V jakých oblastech jste zaznamenali největší pokrok díky této intervenci?<br><b>Důvody využívání:</b> Jaké jsou/byly hlavní důvody pro využívání této intervence?</p>"
               }
             },
             {
               "type": "matrixdropdown",
               "name": "question16",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Hodnocení intervenčních metod - Druhá část:" },
+              "title": {
+                "cs": "Hodnocení intervenčních metod - Druhá část:"
+              },
               "isRequired": true,
-              "commentText": { "cs": "Zde napište jiný typ intervence" },
+              "commentText": {
+                "cs": "Zde napište jiný typ intervence"
+              },
               "columnMinWidth": "120px",
               "alternateRows": true,
               "columns": [
@@ -493,7 +576,13 @@
                   "name": "efektivita",
                   "title": "Efektivita",
                   "cellType": "dropdown",
-                  "choices": [ "1", "2", "3", "4", "5" ]
+                  "choices": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                  ]
                 },
                 {
                   "name": "oblasti_pokroku",
@@ -555,21 +644,19 @@
             },
             {
               "type": "text",
-              "name": "question17",
-              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Kterou z vybraných intervencí považujete za nejpřínosnější pro vaše dítě s PAS a proč?" }
-            },
-            {
-              "type": "text",
               "name": "question18",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Jaká doporučení byste dali ostatním rodičům dětí s PAS ohledně výběru a využívání intervenčních metod?" }
+              "title": {
+                "cs": "Kterou z vybraných intervencí považujete za nejpřínosnější pro vaše dítě s PAS a proč?"
+              }
             },
             {
               "type": "text",
               "name": "question19",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Pokud máte nějaké další připomínky či návrhy, uveďte je prosím zde." }
+              "title": {
+                "cs": "Jaká doporučení byste dali ostatním rodičům dětí s PAS ohledně výběru a využívání intervenčních metod?"
+              }
             }
           ]
         },
@@ -581,7 +668,9 @@
               "type": "radiogroup",
               "name": "question20",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Kombinujete nebo jste kombinovali různé intervenční metody?" },
+              "title": {
+                "cs": "Kombinujete nebo jste kombinovali různé intervenční metody?"
+              },
               "choices": [
                 { "value": "Item 1", "text": { "cs": "Ano" } },
                 { "value": "Item 2", "text": { "cs": "Ne" } }
@@ -591,7 +680,9 @@
               "type": "checkbox",
               "name": "question21",
               "visibleIf": "{question20} <> 'Item 2' and {question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Jaké jsou hlavní důvody pro kombinování těchto intervencí? (vyberte max. 3)" },
+              "title": {
+                "cs": "Jaké jsou hlavní důvody pro kombinování těchto intervencí? (vyberte max. 3)"
+              },
               "isRequired": true,
               "choices": [
                 "Lepší pokrytí různých oblastí vývoje dítěte",
@@ -614,7 +705,9 @@
               "type": "radiogroup",
               "name": "question22",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Jak se vyvíjel váš přístup k intervencím pro vaše dítě s PAS od počátku diagnózy do současnosti?" },
+              "title": {
+                "cs": "Jak se vyvíjel váš přístup k intervencím pro vaše dítě s PAS od počátku diagnózy do současnosti?"
+              },
               "isRequired": true,
               "choices": [
                 "Náš přístup zůstal v zásadě stejný",
@@ -627,7 +720,9 @@
               "type": "checkbox",
               "name": "question23",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii' or {question22} = 'Náš přístup zůstal v zásadě stejný'",
-              "title": { "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)" },
+              "title": {
+                "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)"
+              },
               "isRequired": true,
               "choices": [
                 "Typ intervencí, které využíváme",
@@ -644,7 +739,9 @@
               "type": "checkbox",
               "name": "question24",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)" },
+              "title": {
+                "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)"
+              },
               "isRequired": true,
               "choices": [
                 "Změna potřeb dítěte",
@@ -667,7 +764,9 @@
             {
               "type": "radiogroup",
               "name": "question25",
-              "title": { "cs": "Jak byste popsali finanční situaci vaší rodiny?" },
+              "title": {
+                "cs": "Jak byste popsali finanční situaci vaší rodiny?"
+              },
               "choices": [
                 "Máme potíže vyjít s penězi",
                 "Vyjdeme, ale nemůžeme si dovolit větší výdaje",
@@ -679,7 +778,9 @@
             {
               "type": "checkbox",
               "name": "question26",
-              "title": { "cs": "Jaké jsou podle vás hlavní překážky v přístupu k efektivním intervencím? (vyberte max. 3)" },
+              "title": {
+                "cs": "Jaké jsou podle vás hlavní překážky v přístupu k efektivním intervencím? (vyberte max. 3)"
+              },
               "isRequired": true,
               "choices": [
                 "Finanční náročnost",
@@ -694,14 +795,19 @@
             {
               "type": "rating",
               "name": "question27",
-              "title": { "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)" },
+              "title": {
+                "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)"
+              },
               "isRequired": true,
+              "autoGenerate": false,
               "rateValues": [ "1", "2", "3", "4", "5" ]
             },
             {
               "type": "radiogroup",
               "name": "question28",
-              "title": { "cs": "Jak byste popsali dostupnost intervencí pro děti s PAS ve vašem kraji?" },
+              "title": {
+                "cs": "Jak byste popsali dostupnost intervencí pro děti s PAS ve vašem kraji?"
+              },
               "isRequired": true,
               "choices": [
                 "Velmi obtížně dostupné (dlouhé čekací doby, málo poskytovatelů)",
@@ -721,8 +827,34 @@
               "type": "rating",
               "name": "question29",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": { "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? (1 - velmi nespokojeni, 5 - velmi spokojeni)" },
+              "title": {
+                "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? (1 - velmi nespokojeni, 5 - velmi spokojeni)"
+              },
               "isRequired": true
+              /* Žádná výchozí hodnota – respondent musí vybrat sami */
+            },
+            {
+              "type": "comment",
+              "name": "question30",
+              "visibleIf": "{question12} = 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
+              "title": {
+                "cs": "Pokud máte zkušenosti s intervencemi ze zahraničí, uveďte prosím konkrétní rozdíly v dostupnosti, kvalitě nebo přístupu oproti ČR?"
+              }
+            },
+            {
+              "type": "comment",
+              "name": "question31",
+              "title": {
+                "cs": "Máte nějaké další připomínky nebo nápady týkající se pomoci pro děti s PAS v ČR?"
+              }
+            },
+            {
+              "type": "comment",
+              "name": "question32",
+              "visibleIf": "{question2} = 'Item 2' or {question2} = 'Item 3'",
+              "title": {
+                "cs": "Pokud máte více než jedno dítě s PAS, prosíme, stručně popište případné významné rozdíly v intervencích, jejich dostupnosti nebo efektivitě pro vaše další děti s PAS?"
+              }
             }
           ]
         },
@@ -749,7 +881,9 @@
       "completeText": "Odeslat",
       "firstPageIsStartPage": true
     };
+
     var survey = new Survey.Model(surveyJSON);
+
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
       var url = doPostUrl();
@@ -765,7 +899,9 @@
       var json = JSON.stringify(sender.data);
       xhr.send(json);
     });
+
     survey.render(document.getElementById("surveyElement"));
   </script>
+
 </body>
 </html>

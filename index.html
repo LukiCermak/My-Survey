@@ -1,32 +1,95 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
   <style>
-    body {
-      background-color: #ADD8E6; /* světle modrá */
+    /* Celá plocha dotazníku */
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #0174DF;
+      font-family: "Helvetica", "Arial", sans-serif;
     }
-    /* Alternativní barvy řádků pro matrix dropdown */
-    .sv_matrix tbody tr:nth-child(odd),
-    .sv_matrixdropdown tbody tr:nth-child(odd) {
-      background-color: #ADD8E6; /* světle modrá */
+
+    /* Přenastavení kontejnerů a stránek tak, aby neměly bílý/šedý podklad */
+    .sv_main .sv_container,
+    .sv_main .sv_body,
+    .sv_main .sv_header,
+    .sv_main .sv_page,
+    .sv_main .sv_completed_page,
+    .sv_main .sv_body__navigation {
+      background-color: #0174DF !important;
+      color: #FFFFFF !important;
+      border: none !important;
     }
-    .sv_matrix tbody tr:nth-child(even),
-    .sv_matrixdropdown tbody tr:nth-child(even) {
-      background-color: #FFFFE0; /* světle žlutá */
+
+    /* Aby text nebyl přebarvován uvnitř některých komponent (např. uvítací text, popisy), 
+       nastavíme globálně barvu písma na bílou. */
+    .sv_main, .sv_main * {
+      color: #FFFFFF !important;
+    }
+
+    /* Úprava textů chybových hlášek (requiredErrorText) a drobných textů */
+    .sv_main .sv_q_required_text {
+      color: #FFFFFF !important;
+    }
+
+    /* Tlačítka (Předchozí, Další, Začít dotazník, Odeslat) - výchozí stav */
+    .sv_main .sv_nav_btn {
+      background-color: #0174DF !important;
+      color: #00008B !important;  /* tmavě modrý text */
+      font-weight: bold !important;
+      border: 2px solid #00008B !important; 
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 8px 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Tlačítka - efekt při najetí myší (hover) a stisknutí (active) */
+    .sv_main .sv_nav_btn:hover,
+    .sv_main .sv_nav_btn:active {
+      background-color: #FFFF00 !important; /* žluté pozadí */
+      color: #00008B !important;           /* tmavě modrý text */
+      border-color: #00008B !important;
+    }
+
+    /* CheckBox a RadioGroup - výchozí (nezaškrtnutý) stav */
+    .sv_main .sv_q_checkbox_control label::before,
+    .sv_main .sv_q_radiogroup_control label::before {
+      background-color: #FFFF00 !important; /* žlutá */
+      border: 2px solid #FFFF00 !important;
+    }
+
+    /* CheckBox a RadioGroup - zaškrtnutý stav */
+    .sv_main .sv_q_checkbox_control input[type="checkbox"]:checked + label::before,
+    .sv_main .sv_q_radiogroup_control input[type="radio"]:checked + label::before {
+      background-color: #006400 !important; /* tmavě zelená */
+      border-color: #006400 !important;
+    }
+
+    /* Rating - výchozí stav (hvězdičky nebo kolečka) */
+    .sv_main .sv_q_rating_item .sv_q_rating_item_icon .sv-svg-icon path {
+      fill: #FFFF00 !important; /* žlutá */
+    }
+
+    /* Rating - vybrané hodnocení */
+    .sv_main .sv_q_rating_item.sv_q_rating_item_selected .sv_q_rating_item_icon .sv-svg-icon path {
+      fill: #006400 !important; /* tmavě zelená */
     }
   </style>
 </head>
 <body>
   <div id="surveyElement"></div>
-
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
-
   <script>
+    /* Změna globálního textu pro vyžadovanou odpověď */
+    Survey.surveyLocalization.locales["cs"].requiredError = "Vyberte jednu z možností";
+
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -68,9 +131,8 @@
             {
               "type": "checkbox",
               "name": "Souhlas",
-              "title": "",
               "isRequired": true,
-              "requiredErrorText": "Pro pokračování v dotazníku je nutné souhlasit s účastí ve výzkumu.",
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": "Souhlasím s účastí ve výzkumu" }
               ]
@@ -86,6 +148,7 @@
               "name": "question1",
               "title": { "cs": "Kolik dětí máte celkem ve vaší rodině?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": { "cs": "1 dítě" } },
                 { "value": "Item 2", "text": { "cs": "2 děti" } },
@@ -98,6 +161,7 @@
               "name": "question2",
               "title": { "cs": "Kolik z vašich dětí má diagnostikovanou poruchu autistického spektra (PAS)?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": { "cs": "1 dítě" } },
                 { "value": "Item 2", "text": { "cs": "2 děti" } },
@@ -115,6 +179,7 @@
               "name": "question3",
               "title": { "cs": "Věk dítěte s PAS" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "1-3 roky",
                 "4-6 let",
@@ -128,6 +193,7 @@
               "name": "question4",
               "title": { "cs": "Pohlaví dítěte" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [ "Chlapec", "Dívka", "Jiné" ]
             },
             {
@@ -135,6 +201,7 @@
               "name": "question5",
               "title": { "cs": "V jakém kraji bydlíte?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Hlavní město Praha",
                 "Středočeský kraj",
@@ -157,6 +224,7 @@
               "name": "question6",
               "title": { "cs": "V jakém věku byl Vašemu dítěti diagnostikován PAS?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "1-3 let",
                 "4-5 let",
@@ -171,6 +239,7 @@
               "name": "question7",
               "title": { "cs": "Typ diagnózy PAS" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Dětský autismus",
                 "Atypický autismus",
@@ -241,6 +310,7 @@
               "name": "question12",
               "title": { "cs": "V jakém věku vašeho dítěte jste začali využívat první odbornou podporu, terapii nebo speciální vzdělávací přístup pro děti s PAS?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "1-3 roky",
                 "4-6 let",
@@ -268,6 +338,7 @@
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "U každé z následujících intervenčních metod prosím označte, zda ji aktuálně využíváte nebo jste ji využívali v minulosti:" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "showCommentArea": true,
               "commentText": { "cs": "Zde uveďte o jaký typ intervence se jedná" },
               "alternateRows": true,
@@ -328,6 +399,7 @@
                 "cs": "Hodnocení intervenčních metod - První část:"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "commentText": { "cs": "Zde napište jiný typ intervence" },
               "columnMinWidth": "120px",
               "alternateRows": true,
@@ -412,7 +484,8 @@
               "title": {
                 "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)"
               },
-              "isRequired": true
+              "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností"
             },
             {
               "type": "comment",
@@ -463,6 +536,7 @@
                 "cs": "Jaké jsou hlavní důvody pro kombinování těchto intervencí? (vyberte max. 3)"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Lepší pokrytí různých oblastí vývoje dítěte",
                 "Doporučení odborníků",
@@ -488,6 +562,7 @@
                 "cs": "Jak se vyvíjel váš přístup k intervencím pro vaše dítě s PAS od počátku diagnózy do současnosti?"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Náš přístup zůstal v zásadě stejný",
                 "Náš přístup se postupně vyvíjel s rostoucími zkušenostmi",
@@ -503,6 +578,7 @@
                 "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Typ intervencí, které využíváme",
                 "Intenzita intervencí (četnost nebo délka)",
@@ -522,6 +598,7 @@
                 "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Změna potřeb dítěte",
                 "Nové informace o dostupných intervencích",
@@ -561,6 +638,7 @@
                 "cs": "Jaké jsou podle vás hlavní překážky v přístupu k efektivním intervencím? (vyberte max. 3)"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Finanční náročnost",
                 "Dlouhé čekací doby",
@@ -578,6 +656,7 @@
                 "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "autoGenerate": false,
               "rateValues": [ "1", "2 ", "3 ", "4 ", "5" ]
             },
@@ -588,6 +667,7 @@
                 "cs": "Jak byste popsali dostupnost intervencí pro děti s PAS ve vašem kraji?"
               },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Velmi obtížně dostupné (dlouhé čekací doby, málo poskytovatelů)",
                 "Spíše obtížně dostupné (některé služby jsou dostupné, ale s omezeními)",
@@ -609,7 +689,8 @@
               "title": {
                 "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)"
               },
-              "isRequired": true
+              "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností"
             },
             {
               "type": "comment",
@@ -678,7 +759,7 @@
       xhr.send(json);
     });
 
-    survey.render(document.getElementById("surveyElement"));
+    survey.render("surveyElement");
   </script>
 </body>
 </html>

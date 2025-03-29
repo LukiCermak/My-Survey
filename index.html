@@ -4,57 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
+  <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
   <style>
     body {
-      background-color: #ADD8E6; /* světle modrá */
-      color: #000;
-      font-family: Arial, sans-serif;
+      background-color: #ADD8E6;
+      color: black;
       margin: 0;
-      padding: 20px;
+      font-family: Arial, sans-serif;
     }
-    .sv_container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 960px;
-      margin: auto;
+    /* Zajištění transparentního pozadí kontejneru, aby se projevilo tělo stránky */
+    #surveyElement {
+      background-color: transparent;
     }
-    .sv_matrix table {
-      width: 100%;
-      border-collapse: collapse;
+    /* Střídavé barvy řádků pro matrix dropdown tabulku */
+    .sv_matrix .sv_matrix_table tbody tr:nth-child(odd) {
+      background-color: #ADD8E6;
     }
-    .sv_matrix th,
-    .sv_matrix td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-    .sv_matrix tr:nth-child(even) {
-      background-color: #ADD8E6; /* světle modrá */
-    }
-    .sv_matrix tr:nth-child(odd) {
-      background-color: #FFFFE0; /* světle žlutá */
-    }
-    .sv_nav_btn {
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px 5px;
-      cursor: pointer;
-    }
-    .sv_nav_btn:hover {
-      background-color: #45a049;
+    .sv_matrix .sv_matrix_table tbody tr:nth-child(even) {
+      background-color: #FFFFE0;
     }
   </style>
 </head>
 <body>
-  <div id="surveyElement" class="sv_container"></div>
-
+  <div id="surveyElement"></div>
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
-
   <script>
     var surveyJSON = {
       "locale": "cs",
@@ -438,33 +412,25 @@
               "type": "rating",
               "name": "question29",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)"
-              },
+              "title": { "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)" },
               "isRequired": true
             },
             {
               "type": "comment",
               "name": "question30",
               "visibleIf": "{question12} = 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Pokud máte zkušenosti s intervencemi ze zahraničí, uveďte prosím konkrétní rozdíly v dostupnosti, kvalitě nebo přístupu oproti ČR?"
-              }
+              "title": { "cs": "Pokud máte zkušenosti s intervencemi ze zahraničí, uveďte prosím konkrétní rozdíly v dostupnosti, kvalitě nebo přístupu oproti ČR?" }
             },
             {
               "type": "comment",
               "name": "question31",
-              "title": {
-                "cs": "Máte nějaké další připomínky nebo nápady týkající se pomoci pro děti s PAS v ČR?"
-              }
+              "title": { "cs": "Máte nějaké další připomínky nebo nápady týkající se pomoci pro děti s PAS v ČR?" }
             },
             {
               "type": "comment",
               "name": "question32",
               "visibleIf": "{question2} = 'Item 2' or {question2} = 'Item 3'",
-              "title": {
-                "cs": "Pokud máte více než jedno dítě s PAS, prosíme, stručně popište případné významné rozdíly v intervencích, jejich dostupnosti nebo efektivitě pro vaše další děti s PAS?"
-              }
+              "title": { "cs": "Pokud máte více než jedno dítě s PAS, prosíme, stručně popište případné významné rozdíly v intervencích, jejich dostupnosti nebo efektivitě pro vaše další děti s PAS?" }
             }
           ]
         },
@@ -476,9 +442,7 @@
               "type": "radiogroup",
               "name": "question20",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Kombinujete nebo jste kombinovali různé intervenční metody?"
-              },
+              "title": { "cs": "Kombinujete nebo jste kombinovali různé intervenční metody?" },
               "choices": [
                 { "value": "Item 1", "text": { "cs": "Ano" } },
                 { "value": "Item 2", "text": { "cs": "Ne" } }
@@ -488,9 +452,7 @@
               "type": "checkbox",
               "name": "question21",
               "visibleIf": "{question20} <> 'Item 2' and {question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Jaké jsou hlavní důvody pro kombinování těchto intervencí? (vyberte max. 3)"
-              },
+              "title": { "cs": "Jaké jsou hlavní důvody pro kombinování těchto intervencí? (vyberte max. 3)" },
               "isRequired": true,
               "choices": [
                 "Lepší pokrytí různých oblastí vývoje dítěte",
@@ -513,9 +475,7 @@
               "type": "radiogroup",
               "name": "question22",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Jak se vyvíjel váš přístup k intervencím pro vaše dítě s PAS od počátku diagnózy do současnosti?"
-              },
+              "title": { "cs": "Jak se vyvíjel váš přístup k intervencím pro vaše dítě s PAS od počátku diagnózy do současnosti?" },
               "isRequired": true,
               "choices": [
                 "Náš přístup zůstal v zásadě stejný",
@@ -528,9 +488,7 @@
               "type": "checkbox",
               "name": "question23",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii' or {question22} = 'Náš přístup zůstal v zásadě stejný'",
-              "title": {
-                "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)"
-              },
+              "title": { "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)" },
               "isRequired": true,
               "choices": [
                 "Typ intervencí, které využíváme",
@@ -547,9 +505,7 @@
               "type": "checkbox",
               "name": "question24",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)"
-              },
+              "title": { "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)" },
               "isRequired": true,
               "choices": [
                 "Změna potřeb dítěte",
@@ -572,9 +528,7 @@
             {
               "type": "radiogroup",
               "name": "question25",
-              "title": {
-                "cs": "Jak byste popsali finanční situaci vaší rodiny?"
-              },
+              "title": { "cs": "Jak byste popsali finanční situaci vaší rodiny?" },
               "choices": [
                 "Máme potíže vyjít s penězi",
                 "Vyjdeme, ale nemůžeme si dovolit větší výdaje",
@@ -586,9 +540,7 @@
             {
               "type": "checkbox",
               "name": "question26",
-              "title": {
-                "cs": "Jaké jsou podle vás hlavní překážky v přístupu k efektivním intervencím? (vyberte max. 3)"
-              },
+              "title": { "cs": "Jaké jsou podle vás hlavní překážky v přístupu k efektivním intervencím? (vyberte max. 3)" },
               "isRequired": true,
               "choices": [
                 "Finanční náročnost",
@@ -603,9 +555,7 @@
             {
               "type": "rating",
               "name": "question27",
-              "title": {
-                "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)"
-              },
+              "title": { "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)" },
               "isRequired": true,
               "autoGenerate": false,
               "rateValues": [ "1", "2 ", "3 ", "4 ", "5" ]
@@ -613,9 +563,7 @@
             {
               "type": "radiogroup",
               "name": "question28",
-              "title": {
-                "cs": "Jak byste popsali dostupnost intervencí pro děti s PAS ve vašem kraji?"
-              },
+              "title": { "cs": "Jak byste popsali dostupnost intervencí pro děti s PAS ve vašem kraji?" },
               "isRequired": true,
               "choices": [
                 "Velmi obtížně dostupné (dlouhé čekací doby, málo poskytovatelů)",
@@ -635,33 +583,25 @@
               "type": "rating",
               "name": "question29",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)"
-              },
+              "title": { "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)" },
               "isRequired": true
             },
             {
               "type": "comment",
               "name": "question30",
               "visibleIf": "{question12} = 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "cs": "Pokud máte zkušenosti s intervencemi ze zahraničí, uveďte prosím konkrétní rozdíly v dostupnosti, kvalitě nebo přístupu oproti ČR?"
-              }
+              "title": { "cs": "Pokud máte zkušenosti s intervencemi ze zahraničí, uveďte prosím konkrétní rozdíly v dostupnosti, kvalitě nebo přístupu oproti ČR?" }
             },
             {
               "type": "comment",
               "name": "question31",
-              "title": {
-                "cs": "Máte nějaké další připomínky nebo nápady týkající se pomoci pro děti s PAS v ČR?"
-              }
+              "title": { "cs": "Máte nějaké další připomínky nebo nápady týkající se pomoci pro děti s PAS v ČR?" }
             },
             {
               "type": "comment",
               "name": "question32",
               "visibleIf": "{question2} = 'Item 2' or {question2} = 'Item 3'",
-              "title": {
-                "cs": "Pokud máte více než jedno dítě s PAS, prosíme, stručně popište případné významné rozdíly v intervencích, jejich dostupnosti nebo efektivitě pro vaše další děti s PAS?"
-              }
+              "title": { "cs": "Pokud máte více než jedno dítě s PAS, prosíme, stručně popište případné významné rozdíly v intervencích, jejich dostupnosti nebo efektivitě pro vaše další děti s PAS?" }
             }
           ]
         },
@@ -690,7 +630,6 @@
     };
 
     var survey = new Survey.Model(surveyJSON);
-
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
       var url = "<?!= doPostUrl() ?>";
@@ -703,10 +642,8 @@
           console.error("Chyba při odesílání dat: " + xhr.statusText);
         }
       };
-      var json = JSON.stringify(sender.data);
-      xhr.send(json);
+      xhr.send(JSON.stringify(sender.data));
     });
-
     survey.render(document.getElementById("surveyElement"));
   </script>
 </body>

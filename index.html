@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
-  <link rel="stylesheet" href="survey-core.min.css" type="text/css">
+  <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
 </head>
 <body>
   <div id="surveyElement"></div>
 
-  <script src="survey.core.min.js"></script>
-  <script src="survey-js-ui.min.js"></script>
+  <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
+  <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
 
   <script>
     var surveyJSON = {
@@ -652,7 +652,7 @@
 
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
-      var url = "https://script.google.com/macros/s/AKfycbzqrzwiylOJJeBRa8ZIcL8R4-_krpbxD1wBub6gZ2-W19SNuNYqdOCJAa4HtI15VdFBfA/exec";
+      var url = "<?!= doPostUrl() ?>";
       xhr.open("POST", url);
       xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
       xhr.onload = function() {

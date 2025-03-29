@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
@@ -14,17 +14,11 @@
       margin: 0;
       padding: 0;
     }
-    /* Celé rozhraní Survey – kontejner, stránky, otázky, nadpisy */
-    .sv_main,
-    .sv_container,
-    .sv_body_container,
-    .sv_page,
-    .sv_q,
-    .sv_title,
-    .sv_q_title {
+    /* Přepis backgroundu hlavních kontejnerů SurveyJS */
+    .sv_main, .sv_body_container, .sv_container, .sv_page, .sv_header, .sv_footer {
       background-color: #0174DF !important;
     }
-    /* Navigační tlačítka (Zpět, Další, Začít, Odeslat) */
+    /* Tlačítka */
     .sv_nav_btn, .sv_btn {
       background-color: #FFD84D !important;
       color: #110453 !important;
@@ -34,14 +28,14 @@
     .sv_nav_btn:hover, .sv_btn:hover {
       background-color: #00C837 !important;
     }
-    /* Globální text chybové hlášky (už se zobrazí "Vyberte jednu z možností") */
+    /* Chybová hláška */
     .sv_q_required_text {
       font-style: normal;
     }
-    /* Checkbox – nezaškrtnuté žluté, po označení zelené */
-    .sv_q_checkbox_control label {
+    /* Checkboxy */
+    .sv_q_checkbox_control .sv_q_checkbox_label {
       background-color: #FFD84D !important;
-      color: #110453 !important;
+      color: #110453;
       padding: 5px;
       border-radius: 3px;
       transition: background-color 0.3s;
@@ -49,10 +43,10 @@
     .sv_q_checkbox_control input[type="checkbox"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Radiogroup – stejný styl jako checkbox */
+    /* Radiogroup */
     .sv_q_radiogroup_control label {
       background-color: #FFD84D !important;
-      color: #110453 !important;
+      color: #110453;
       padding: 5px;
       border-radius: 3px;
       transition: background-color 0.3s;
@@ -60,17 +54,20 @@
     .sv_q_radiogroup_control input[type="radio"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Rating – nezaškrtnuté žluté, označené zelené */
+    /* Rating */
+    .sv_q_rating {
+      background-color: transparent;
+    }
     .sv_q_rating .sv_q_radiogroup_item {
       background-color: #FFD84D !important;
-      color: #110453 !important;
+      color: #110453;
       border-radius: 3px;
       transition: background-color 0.3s;
     }
     .sv_q_rating .sv_q_radiogroup_item input[type="radio"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Otázky s komentářem – pozadí komentáře žluté, textové pole má po focusu zelenou */
+    /* Komentáře */
     .sv_q_comment {
       background-color: #FFD84D !important;
       padding: 10px;
@@ -78,40 +75,34 @@
     }
     .sv_q_comment_textarea textarea {
       background-color: #0174DF !important;
-      color: #110453 !important;
+      color: #110453;
       padding: 5px;
-      border: 1px solid #110453 !important;
+      border: 1px solid #110453;
       border-radius: 3px;
       transition: background-color 0.3s;
     }
     .sv_q_comment_textarea textarea.filled {
       background-color: #00C837 !important;
     }
-    /* Matrixdropdown – pokud je matrix renderována jako tabulka, nastavíme střídající se řádky */
-    table.sv_matrix {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    table.sv_matrix tr:nth-child(odd) {
+    /* Matrix – nastavení střídání řádků pro matrixdropdown i klasickou matrix otázku */
+    .sv_matrixdropdown .sv_matrix_table tr:nth-child(odd),
+    .sv_matrix .sv_matrix_table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
-    table.sv_matrix tr:nth-child(even) {
+    .sv_matrixdropdown .sv_matrix_table tr:nth-child(even),
+    .sv_matrix .sv_matrix_table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    table.sv_matrix th,
-    table.sv_matrix td {
-      border: 1px solid #110453;
-      padding: 5px;
-    }
-    table.sv_matrix select {
+    /* Select uvnitř matrix dropdown */
+    .sv_matrixdropdown .sv_matrix_cell select {
       background-color: #FFD84D !important;
-      color: #110453 !important;
+      color: #110453;
       border: none;
       padding: 3px;
       border-radius: 3px;
       transition: background-color 0.3s;
     }
-    table.sv_matrix select:focus {
+    .sv_matrixdropdown .sv_matrix_cell select:focus {
       background-color: #00C837 !important;
     }
   </style>
@@ -121,7 +112,7 @@
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
   <script>
-    // Nastavení české lokalizace a chybové zprávy
+    // Nastavení lokalizace a výchozí chybové hlášky
     Survey.surveyLocalization.locales.cs.requiredError = "Vyberte jednu z možností";
     Survey.surveyLocalization.currentLocale = "cs";
 
@@ -374,32 +365,32 @@
                 { "value": "minulost", "text": "Využívali jsme v minulosti" }
               ],
               "rows": [
-                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)", "visibleIf": "{question14.aba} notempty" },
-                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)", "visibleIf": "{question14.kbt} notempty" },
-                { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
-                { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
-                { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
-                { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
-                { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
-                { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
-                { "value": "socialni", "text": "Sociální příběhy", "visibleIf": "{question14.socialni} notempty" },
-                { "value": "ergo", "text": "Ergoterapie", "visibleIf": "{question14.ergo} notempty" },
-                { "value": "sensoricka", "text": "Senzorická integrace", "visibleIf": "{question14.sensoricka} notempty" },
-                { "value": "neurovyvoj", "text": "Neurovývojová terapie", "visibleIf": "{question14.neurovyvoj} notempty" },
-                { "value": "snoezelen", "text": "Snoezelen", "visibleIf": "{question14.snoezelen} notempty" },
-                { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
-                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
-                { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
-                { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
-                { "value": "expresivni", "text": "Expresivní terapie", "visibleIf": "{question14.expresivni} notempty" },
-                { "value": "zvire", "text": "Terapie asistované zvířaty", "visibleIf": "{question14.zvire} notempty" },
-                { "value": "lego", "text": "Lego terapie", "visibleIf": "{question14.lego} notempty" },
-                { "value": "neurofeedback", "text": "Neurofeedback", "visibleIf": "{question14.neurofeedback} notempty" },
-                { "value": "kranio", "text": "Kraniosakrální terapie", "visibleIf": "{question14.kranio} notempty" },
-                { "value": "mikroflora", "text": "Léčba střevní mikroflóry", "visibleIf": "{question14.mikroflora} notempty" },
-                { "value": "jine", "text": "Jiný typ", "visibleIf": "{question14.jine} notempty" }
+                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)" },
+                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)" },
+                { "value": "dir", "text": "DIR/Floortime" },
+                { "value": "sonrise", "text": "Son-Rise program" },
+                { "value": "logo", "text": "Logopedická terapie" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)" },
+                { "value": "makaton", "text": "Znakování do řeči a Makaton" },
+                { "value": "s2c", "text": "S2C (Hláskování)" },
+                { "value": "strukturovane", "text": "Strukturované učení" },
+                { "value": "socialni", "text": "Sociální příběhy" },
+                { "value": "ergo", "text": "Ergoterapie" },
+                { "value": "sensoricka", "text": "Senzorická integrace" },
+                { "value": "neurovyvoj", "text": "Neurovývojová terapie" },
+                { "value": "snoezelen", "text": "Snoezelen" },
+                { "value": "handle", "text": "HANDLE" },
+                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda" },
+                { "value": "auditivni", "text": "Auditivní intervence" },
+                { "value": "esdm", "text": "ESDM" },
+                { "value": "ota_vti", "text": "O.T.A. a VTI" },
+                { "value": "expresivni", "text": "Expresivní terapie" },
+                { "value": "zvire", "text": "Terapie asistované zvířaty" },
+                { "value": "lego", "text": "Lego terapie" },
+                { "value": "neurofeedback", "text": "Neurofeedback" },
+                { "value": "kranio", "text": "Kraniosakrální terapie" },
+                { "value": "mikroflora", "text": "Léčba střevní mikroflóry" },
+                { "value": "jine", "text": "Jiný typ" }
               ]
             }
           ]
@@ -469,32 +460,32 @@
               ],
               "horizontalScroll": true,
               "rows": [
-                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)", "visibleIf": "{question14.aba} notempty" },
-                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)", "visibleIf": "{question14.kbt} notempty" },
-                { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
-                { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
-                { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
-                { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
-                { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
-                { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
-                { "value": "socialni", "text": "Sociální příběhy", "visibleIf": "{question14.socialni} notempty" },
-                { "value": "ergo", "text": "Ergoterapie", "visibleIf": "{question14.ergo} notempty" },
-                { "value": "sensoricka", "text": "Senzorická integrace", "visibleIf": "{question14.sensoricka} notempty" },
-                { "value": "neurovyvoj", "text": "Neurovývojová terapie", "visibleIf": "{question14.neurovyvoj} notempty" },
-                { "value": "snoezelen", "text": "Snoezelen", "visibleIf": "{question14.snoezelen} notempty" },
-                { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
-                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
-                { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
-                { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
-                { "value": "expresivni", "text": "Expresivní terapie", "visibleIf": "{question14.expresivni} notempty" },
-                { "value": "zvire", "text": "Terapie asistované zvířaty", "visibleIf": "{question14.zvire} notempty" },
-                { "value": "lego", "text": "Lego terapie", "visibleIf": "{question14.lego} notempty" },
-                { "value": "neurofeedback", "text": "Neurofeedback", "visibleIf": "{question14.neurofeedback} notempty" },
-                { "value": "kranio", "text": "Kraniosakrální terapie", "visibleIf": "{question14.kranio} notempty" },
-                { "value": "mikroflora", "text": "Léčba střevní mikroflóry", "visibleIf": "{question14.mikroflora} notempty" },
-                { "value": "jine", "text": "Jiný typ", "visibleIf": "{question14.jine} notempty" }
+                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)" },
+                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)" },
+                { "value": "dir", "text": "DIR/Floortime" },
+                { "value": "sonrise", "text": "Son-Rise program" },
+                { "value": "logo", "text": "Logopedická terapie" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)" },
+                { "value": "makaton", "text": "Znakování do řeči a Makaton" },
+                { "value": "s2c", "text": "S2C (Hláskování)" },
+                { "value": "strukturovane", "text": "Strukturované učení" },
+                { "value": "socialni", "text": "Sociální příběhy" },
+                { "value": "ergo", "text": "Ergoterapie" },
+                { "value": "sensoricka", "text": "Senzorická integrace" },
+                { "value": "neurovyvoj", "text": "Neurovývojová terapie" },
+                { "value": "snoezelen", "text": "Snoezelen" },
+                { "value": "handle", "text": "HANDLE" },
+                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda" },
+                { "value": "auditivni", "text": "Auditivní intervence" },
+                { "value": "esdm", "text": "ESDM" },
+                { "value": "ota_vti", "text": "O.T.A. a VTI" },
+                { "value": "expresivni", "text": "Expresivní terapie" },
+                { "value": "zvire", "text": "Terapie asistované zvířaty" },
+                { "value": "lego", "text": "Lego terapie" },
+                { "value": "neurofeedback", "text": "Neurofeedback" },
+                { "value": "kranio", "text": "Kraniosakrální terapie" },
+                { "value": "mikroflora", "text": "Léčba střevní mikroflóry" },
+                { "value": "jine", "text": "Jiný typ" }
               ]
             }
           ]
@@ -653,7 +644,7 @@
               "title": { "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)" },
               "isRequired": true,
               "autoGenerate": false,
-              "rateValues": [ "1", "2 ", "3 ", "4 ", "5" ]
+              "rateValues": [ "1", "2", "3", "4", "5" ]
             },
             {
               "type": "radiogroup",

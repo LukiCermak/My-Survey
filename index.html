@@ -31,7 +31,7 @@
       border: none !important;
     }
 
-    /* Tlačítka navigace: základní stav žlutý, při hover/aktivaci zelený */
+    /* Navigační tlačítka – základní stav žlutý, při hover/aktivaci zelený */
     .sv-footer .sv-nav-btn, 
     .sd-navigation__prev-btn, 
     .sd-navigation__next-btn,
@@ -60,37 +60,37 @@
       color: #110453 !important;
     }
 
-    /* Checkboxy – nezvolené žluté, zvolené zelené */
-    .sv_q_checkbox_control label span input + .sv_q_checkbox,
-    .sd-item .sd-checkbox__control,
-    .sv_q_checkbox_control .sv_q_checkbox {
+    /* Checkboxy – nezvolené: žluté, zvolené: zelené */
+    .sv_q_checkbox_control input[type="checkbox"]:not(:checked) + label .sv_q_checkbox,
+    .sd-item .sd-checkbox__control:not(:checked),
+    .sv_q_checkbox_control .sv_q_checkbox:not(.sv_q_checkbox--checked) {
       background-color: #FFD84D !important;
       border: 1px solid #FFD84D !important;
     }
-    .sv_q_checkbox_control label span input:checked + .sv_q_checkbox,
-    .sd-item .sd-checkbox__control input:checked + .sd-checkbox__svg,
-    .sv_q_checkbox_control input[type="checkbox"]:checked + label .sv_q_checkbox {
+    .sv_q_checkbox_control input[type="checkbox"]:checked + label .sv_q_checkbox,
+    .sd-item .sd-checkbox__control:checked + .sd-checkbox__svg,
+    .sv_q_checkbox_control .sv_q_checkbox.sv_q_checkbox--checked {
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
 
-    /* Radiogroup – nezvolené žluté, zvolené zelené */
-    .sv_q_radiogroup_control label span input + .sv_q_radiogroup_button,
-    .sd-item .sd-radio__control,
-    .sv_q_radiogroup_control .sv_q_radiogroup_button {
+    /* Radiogroup – nezvolené: žluté, zvolené: zelené */
+    .sv_q_radiogroup_control input[type="radio"]:not(:checked) + label .sv_q_radiogroup_button,
+    .sd-item .sd-radio__control:not(:checked),
+    .sv_q_radiogroup_control .sv_q_radiogroup_button:not(.sv_q_radiogroup_button--checked) {
       background-color: #FFD84D !important;
       border: 1px solid #FFD84D !important;
     }
-    .sv_q_radiogroup_control label span input:checked + .sv_q_radiogroup_button,
-    .sd-item .sd-radio__control input:checked + .sd-radio__svg,
-    .sv_q_radiogroup_control input[type="radio"]:checked + label .sv_q_radiogroup_button {
+    .sv_q_radiogroup_control input[type="radio"]:checked + label .sv_q_radiogroup_button,
+    .sd-item .sd-radio__control:checked + .sd-radio__svg,
+    .sv_q_radiogroup_control .sv_q_radiogroup_button.sv_q_radiogroup_button--checked {
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
 
-    /* Rating – nezvolené žluté, zvolené zelené */
-    .sv_q_rating .sv-rating-item, 
-    .sd-rating .sd-item,
+    /* Rating – nezvolené: žluté, zvolené: zelené */
+    .sv_q_rating .sv-rating-item:not(.sv-rating-item--selected),
+    .sd-rating .sd-item:not(.sd-item--selected),
     .sd-item--selectable:not(.sd-item--selected).sd-rating__item {
       background-color: #FFD84D !important;
       border: 1px solid #FFD84D !important;
@@ -102,7 +102,7 @@
       border-color: #00C837 !important;
     }
 
-    /* Comment: kontejner otázky žlutý, textové pole – základně modré, při fokusu zelené */
+    /* Comment – kontejner otázky: žluté, textové pole: základně modré, při fokusu zelené */
     .sv_q_comment, .sv_q--comment, .sd-question__comment {
       background-color: #FFD84D !important;
     }
@@ -120,14 +120,13 @@
       border-color: #00C837 !important;
     }
 
-    /* Matrix – zachování střídání řádků, ale interaktivní prvky uvnitř mají vlastní barevné schéma */
+    /* Matrix – střídání řádků (liché: modré, sudé: žluté) a interaktivní prvky uvnitř */
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
     .sd-table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    /* Přepsání stylu pro select a radiobuttony uvnitř matic – vždy nezvolené žluté, při fokusu/aktivaci zelené */
     .sd-table select,
     .sd-table .sv_q_radiogroup_button,
     .sd-table .sd-dropdown,
@@ -149,7 +148,7 @@
       border: 1px solid #00C837 !important;
     }
 
-    /* Chybové hlášky */
+    /* Chybové hlášky zůstávají tmavě fialové */
     .sv_q_error, .sv_q_required_text,
     .sd-question__erbox, .sd-question__required-text {
       color: #110453 !important;
@@ -161,7 +160,7 @@
   <!-- Kontejner pro dotazník -->
   <div id="surveyElement"></div>
 
-  <!-- Funkce doPostUrl – upravte dle svého endpointu -->
+  <!-- Funkce doPostUrl – případně upravte dle svého endpointu -->
   <script>
     function doPostUrl() {
       return "https://example.com/myEndpoint";

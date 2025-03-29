@@ -5,90 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body, .sv_main, .sv_container {
+    body {
+      font-family: 'Open Sans', sans-serif;
       background-color: #0174DF;
+      margin: 0;
+      padding: 0;
+    }
+    .sv_main, .sv_container, .sv_page {
+      background-color: #0174DF !important;
+    }
+    .sv_q_title,
+    .sv_q_comment,
+    .sv_matrix,
+    .sv_dropdown,
+    .sv_q_text,
+    .sv_q_textarea {
       font-family: 'Open Sans', sans-serif;
     }
-    /* Obecné nastavení tlačítek */
     .sv_nav_btn {
-      background-color: #0174DF;
-      color: #110453;
+      background-color: #0174DF !important;
+      color: #110453 !important;
       border: none;
+      padding: 8px 16px;
+      cursor: pointer;
     }
     .sv_nav_btn:hover, .sv_nav_btn:active {
-      background-color: #FFD84D;
+      background-color: #FFD84D !important;
     }
-    /* Úprava required message */
-    .sv_q_req_text {
-      color: #110453;
+    /* Checkbox a radiogroup pro hlavní dotazy */
+    .sv_q_checkbox_control input[type="checkbox"] {
+      accent-color: #FFD84D;
     }
-    /* Checkbox a radiogroup: nevybrané = žlutá, vybrané = zelená */
-    .sv_q_checkbox_control input[type=checkbox] + label:before,
-    .sv_q_radiogroup_control input[type=radio] + label:before,
-    .sv_matrix .sv_matrix_cell input[type=radio] + label:before {
-      background-color: #FFD84D;
+    .sv_q_checkbox_control input[type="checkbox"]:checked {
+      accent-color: #00C837;
     }
-    .sv_q_checkbox_control input[type=checkbox]:checked + label:before,
-    .sv_q_radiogroup_control input[type=radio]:checked + label:before,
-    .sv_matrix .sv_matrix_cell input[type=radio]:checked + label:before {
-      background-color: #00C837;
+    .sv_q_radiogroup_control input[type="radio"] {
+      accent-color: #FFD84D;
     }
-    /* Rating: default žlutá, po výběru zelená */
+    .sv_q_radiogroup_control input[type="radio"]:checked {
+      accent-color: #00C837;
+    }
+    /* Rating */
     .sv_q_rating .sv_q_rating_item {
       background-color: #FFD84D;
+      border: 1px solid #0174DF;
+      color: #110453;
     }
     .sv_q_rating .sv_q_rating_item.selected {
       background-color: #00C837;
     }
-    /* Textové otázky: kontejner pozadí žluté, vstupy modré a po vyplnění zelené */
-    .sv_q_text {
+    /* Textové otázky – pozadí dotazníku zůstává modré, ale textové vstupy */
+    .sv_q_text_root {
       background-color: #FFD84D;
       padding: 10px;
     }
-    .sv_q_text .sv_q_text_input {
+    .sv_q_text, .sv_q_textarea {
       background-color: #0174DF;
-      border: 1px solid #110453;
       color: #fff;
+      border: 1px solid #0174DF;
       padding: 5px;
     }
-    .sv_q_text .sv_q_text_input:valid {
+    .sv_q_text:focus, .sv_q_textarea:focus,
+    .sv_q_text:valid, .sv_q_textarea:valid {
       background-color: #00C837;
     }
-    /* Matrix: střídavé řádky */
-    .sv_matrix table tr:nth-child(odd) {
+    /* Matrix – střídání řádků */
+    .sv_matrix .sv_matrix_row:nth-child(odd) {
       background-color: #0174DF;
     }
-    .sv_matrix table tr:nth-child(even) {
+    .sv_matrix .sv_matrix_row:nth-child(even) {
       background-color: #FFD84D;
     }
-    /* Matrix: pro buňky se selecty a radiobuttony nastavíme opačnou barvu */
-    .sv_matrix table tr:nth-child(odd) .sv_matrix_cell select,
-    .sv_matrix table tr:nth-child(odd) .sv_matrix_cell input[type=radio] + label:before {
+    /* Dropdowny v matici */
+    .sv_matrix .sv_q_dropdown_control select {
       background-color: #FFD84D;
+      border: 1px solid #0174DF;
+      color: #110453;
+      padding: 4px;
     }
-    .sv_matrix table tr:nth-child(even) .sv_matrix_cell select,
-    .sv_matrix table tr:nth-child(even) .sv_matrix_cell input[type=radio] + label:before {
+    .sv_matrix .sv_q_dropdown_control select:focus,
+    .sv_matrix .sv_q_dropdown_control select:valid {
       background-color: #0174DF;
     }
-    .sv_matrix table tr:nth-child(odd) .sv_matrix_cell select:valid,
-    .sv_matrix table tr:nth-child(even) .sv_matrix_cell select:valid {
-      background-color: #00C837;
+    /* Radiogroup v matici – jednoduché nastavení accent-color */
+    .sv_matrix .sv_q_radiogroup_control input[type="radio"] {
+      accent-color: #FFD84D;
     }
-    .sv_matrix table tr:nth-child(odd) .sv_matrix_cell input[type=radio]:checked + label:before,
-    .sv_matrix table tr:nth-child(even) .sv_matrix_cell input[type=radio]:checked + label:before {
-      background-color: #00C837;
+    .sv_matrix .sv_q_radiogroup_control input[type="radio"]:checked {
+      accent-color: #0174DF;
     }
   </style>
 </head>
 <body>
   <div id="surveyElement"></div>
-
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
-
   <script>
+    // Nastavení lokalizace chybové hlášky
+    Survey.surveyLocalization.locales["cs"].requiredError = "Vyberte jednu z možností";
+
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -132,7 +149,7 @@
               "name": "Souhlas",
               "title": "",
               "isRequired": true,
-              "requiredErrorText": "Pro pokračování v dotazníku je nutné souhlasit s účastí ve výzkumu.",
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": "Souhlasím s účastí ve výzkumu" }
               ]
@@ -148,6 +165,7 @@
               "name": "question1",
               "title": { "cs": "Kolik dětí máte celkem ve vaší rodině?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": { "cs": "1 dítě" } },
                 { "value": "Item 2", "text": { "cs": "2 děti" } },
@@ -160,6 +178,7 @@
               "name": "question2",
               "title": { "cs": "Kolik z vašich dětí má diagnostikovanou poruchu autistického spektra (PAS)?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 { "value": "Item 1", "text": { "cs": "1 dítě" } },
                 { "value": "Item 2", "text": { "cs": "2 děti" } },
@@ -177,6 +196,7 @@
               "name": "question3",
               "title": { "cs": "Věk dítěte s PAS" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "1-3 roky",
                 "4-6 let",
@@ -190,6 +210,7 @@
               "name": "question4",
               "title": { "cs": "Pohlaví dítěte" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [ "Chlapec", "Dívka", "Jiné" ]
             },
             {
@@ -197,6 +218,7 @@
               "name": "question5",
               "title": { "cs": "V jakém kraji bydlíte?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Hlavní město Praha",
                 "Středočeský kraj",
@@ -219,6 +241,7 @@
               "name": "question6",
               "title": { "cs": "V jakém věku byl Vašemu dítěti diagnostikován PAS?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "1-3 let",
                 "4-5 let",
@@ -233,6 +256,7 @@
               "name": "question7",
               "title": { "cs": "Typ diagnózy PAS" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Dětský autismus",
                 "Atypický autismus",
@@ -293,16 +317,14 @@
         },
         {
           "name": "page4a",
-          "title": {
-            "default": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení ",
-            "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (a) "
-          },
+          "title": { "default": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení ", "cs": "IV. Zkušenosti s intervenčními metodami a jejich hodnocení (a) " },
           "elements": [
             {
               "type": "radiogroup",
               "name": "question12",
               "title": { "cs": "V jakém věku vašeho dítěte jste začali využívat první odbornou podporu, terapii nebo speciální vzdělávací přístup pro děti s PAS?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "1-3 roky",
                 "4-6 let",
@@ -316,6 +338,7 @@
               "name": "question13",
               "visibleIf": "{question12} = 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "Z jakého důvodu jste zatím nezačali využívat žádnou odbornou podporu nebo terapii?" },
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Čekáme na zahájení služeb",
                 "Nemáme dostatek informací o dostupných možnostech",
@@ -330,6 +353,7 @@
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "U každé z následujících intervenčních metod prosím označte, zda ji aktuálně využíváte nebo jste ji využívali v minulosti:" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "showCommentArea": true,
               "commentText": { "cs": "Zde uveďte o jaký typ intervence se jedná" },
               "alternateRows": true,
@@ -343,7 +367,7 @@
                 { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
+                { "value": "voks", "text": "VOKS", "visibleIf": "{question14.voks} notempty" },
                 { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
                 { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
                 { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
@@ -355,7 +379,7 @@
                 { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
                 { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
                 { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM (Early Start Denver Model)", "visibleIf": "{question14.esdm} notempty" },
+                { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
                 { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
                 { "value": "expresivni", "text": "Expresivní terapie", "visibleIf": "{question14.expresivni} notempty" },
                 { "value": "zvire", "text": "Terapie asistované zvířaty", "visibleIf": "{question14.zvire} notempty" },
@@ -385,11 +409,9 @@
               "type": "matrixdropdown",
               "name": "question15",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-              "title": {
-                "default": "Hodnocení intervenčních metod",
-                "cs": "Hodnocení intervenčních metod - První část:"
-              },
+              "title": { "default": "Hodnocení intervenčních metod", "cs": "Hodnocení intervenčních metod - První část:" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "commentText": { "cs": "Zde napište jiný typ intervence" },
               "columnMinWidth": "120px",
               "alternateRows": true,
@@ -472,7 +494,8 @@
               "name": "question29",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)" },
-              "isRequired": true
+              "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností"
             },
             {
               "type": "comment",
@@ -505,7 +528,8 @@
               "choices": [
                 { "value": "Item 1", "text": { "cs": "Ano" } },
                 { "value": "Item 2", "text": { "cs": "Ne" } }
-              ]
+              ],
+              "requiredErrorText": "Vyberte jednu z možností"
             },
             {
               "type": "checkbox",
@@ -513,6 +537,7 @@
               "visibleIf": "{question20} <> 'Item 2' and {question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "Jaké jsou hlavní důvody pro kombinování těchto intervencí? (vyberte max. 3)" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Lepší pokrytí různých oblastí vývoje dítěte",
                 "Doporučení odborníků",
@@ -536,6 +561,7 @@
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "Jak se vyvíjel váš přístup k intervencím pro vaše dítě s PAS od počátku diagnózy do současnosti?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Náš přístup zůstal v zásadě stejný",
                 "Náš přístup se postupně vyvíjel s rostoucími zkušenostmi",
@@ -549,6 +575,7 @@
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii' or {question22} = 'Náš přístup zůstal v zásadě stejný'",
               "title": { "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Typ intervencí, které využíváme",
                 "Intenzita intervencí (četnost nebo délka)",
@@ -566,6 +593,7 @@
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Změna potřeb dítěte",
                 "Nové informace o dostupných intervencích",
@@ -594,13 +622,15 @@
                 "Jsme finančně zajištěni",
                 "Můžeme si dovolit nadstandardní výdaje",
                 "Preferuji neodpovídat"
-              ]
+              ],
+              "requiredErrorText": "Vyberte jednu z možností"
             },
             {
               "type": "checkbox",
               "name": "question26",
               "title": { "cs": "Jaké jsou podle vás hlavní překážky v přístupu k efektivním intervencím? (vyberte max. 3)" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Finanční náročnost",
                 "Dlouhé čekací doby",
@@ -616,14 +646,16 @@
               "name": "question27",
               "title": { "cs": "Jak hodnotíte celkovou finanční dostupnost intervencí? (1 - velmi nedostupné, 5 - velmi dostupné)" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "autoGenerate": false,
-              "rateValues": [ "1", "2 ", "3 ", "4 ", "5" ]
+              "rateValues": [ "1", "2", "3", "4", "5" ]
             },
             {
               "type": "radiogroup",
               "name": "question28",
               "title": { "cs": "Jak byste popsali dostupnost intervencí pro děti s PAS ve vašem kraji?" },
               "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností",
               "choices": [
                 "Velmi obtížně dostupné (dlouhé čekací doby, málo poskytovatelů)",
                 "Spíše obtížně dostupné (některé služby jsou dostupné, ale s omezeními)",
@@ -643,7 +675,8 @@
               "name": "question29",
               "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": { "cs": "Jak jste celkově spokojeni s kvalitou poskytovaných intervenčních služeb? \n(1 - velmi nespokojeni, 5 - velmi spokojeni)" },
-              "isRequired": true
+              "isRequired": true,
+              "requiredErrorText": "Vyberte jednu z možností"
             },
             {
               "type": "comment",
@@ -688,10 +721,7 @@
       "firstPageIsStartPage": true
     };
 
-    Survey.surveyLocalization.locales["cs"].requiredError = "Vyberte jednu z možností";
-
     var survey = new Survey.Model(surveyJSON);
-
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
       var url = "<?!= doPostUrl() ?>";
@@ -707,7 +737,6 @@
       var json = JSON.stringify(sender.data);
       xhr.send(json);
     });
-
     survey.render(document.getElementById("surveyElement"));
   </script>
 </body>

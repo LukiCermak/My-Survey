@@ -4,82 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
-  <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <style>
-    /* Základní nastavení fontu a pozadí stránek */
-    body, .sv_main, .sv_container, .sv_page {
-      font-family: 'Open Sans', sans-serif;
-      background-color: #0174DF !important;
-    }
-    
-    /* Styly pro navigační tlačítka (Zpět, Další, Začít dotazník, Odeslat) */
-    .sv_nav_btn {
-      background-color: #0174DF !important;
-      color: #110453 !important;
-      border: none;
-    }
-    .sv_nav_btn:hover, .sv_nav_btn:active {
-      background-color: #FFD84D !important;
-    }
-    
-    /* Globální nastavení chybové hlášky pro povinná pole */
-    .sv_qst_required_text {
-      /* Text hlášky je nastaven přímo pomocí vlastnosti survey.requiredErrorText */
-    }
-    
-    /* Checkboxy a radiobuttony – nezvolené = žlutá, označené = zelená */
-    input[type="checkbox"] {
-      accent-color: #FFD84D;
-    }
-    input[type="checkbox"]:checked {
-      accent-color: #00C837;
-    }
-    input[type="radio"] {
-      accent-color: #FFD84D;
-    }
-    input[type="radio"]:checked {
-      accent-color: #00C837;
-    }
-    
-    /* Nastavení textových polí – počáteční barva pozadí a změna po vyplnění */
-    .sv_q_text_root input[type="text"],
-    .sv_q_text_root textarea {
-      background-color: #0174DF;
-      color: #ffffff;
-      border: 1px solid #ccc;
-    }
-    .sv_q_text_root input[type="text"]:not(:placeholder-shown),
-    .sv_q_text_root textarea:not(:placeholder-shown) {
-      background-color: #00C837;
-    }
-    
-    /* Matrix – střídání barev řádků: liché řádky žluté, sudé řádky modré */
-    .sv_matrix table tr:nth-child(odd) {
-      background-color: #FFD84D;
-    }
-    .sv_matrix table tr:nth-child(even) {
-      background-color: #0174DF;
-    }
-    
-    /* Matrix – styly pro inputy (dropdowny, radiobuttony) v závislosti na barvě řádku */
-    .sv_matrix table tr:nth-child(even) input[type="radio"],
-    .sv_matrix table tr:nth-child(even) select {
-      background-color: #FFD84D;
-    }
-    .sv_matrix table tr:nth-child(even) input[type="radio"]:checked,
-    .sv_matrix table tr:nth-child(even) select:focus {
-      background-color: #0174DF;
-    }
-    .sv_matrix table tr:nth-child(odd) input[type="radio"],
-    .sv_matrix table tr:nth-child(odd) select {
-      background-color: #0174DF;
-    }
-    .sv_matrix table tr:nth-child(odd) input[type="radio"]:checked,
-    .sv_matrix table tr:nth-child(odd) select:focus {
-      background-color: #FFD84D;
-    }
-  </style>
+  <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" type="text/css">
 </head>
 <body>
   <div id="surveyElement"></div>
@@ -88,11 +13,6 @@
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
 
   <script>
-    // Definice funkce, aby se nezobrazovala chybová hláška s undefined
-    function doPostUrl() {
-      return "https://example.com"; // Zde nahraďte platnou URL adresou
-    }
-
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -136,7 +56,7 @@
               "name": "Souhlas",
               "title": "",
               "isRequired": true,
-              "requiredErrorText": "Vyberte jednu z možností",
+              "requiredErrorText": "Pro pokračování v dotazníku je nutné souhlasit s účastí ve výzkumu.",
               "choices": [
                 { "value": "Item 1", "text": "Souhlasím s účastí ve výzkumu" }
               ]
@@ -279,6 +199,7 @@
             }
           ]
         },
+
         {
           "name": "page3",
           "title": "III. Obecné zkušenosti s péčí o dítě s PAS ",
@@ -295,6 +216,7 @@
             }
           ]
         },
+
         {
           "name": "page4a",
           "title": {
@@ -342,32 +264,32 @@
                 { "value": "minulost", "text": "Využívali jsme v minulosti" }
               ],
               "rows": [
-                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)", "visibleIf": "{question14.aba} notempty" },
-                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)", "visibleIf": "{question14.kbt} notempty" },
-                { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
-                { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
-                { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
-                { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
-                { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
-                { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
-                { "value": "socialni", "text": "Sociální příběhy", "visibleIf": "{question14.socialni} notempty" },
-                { "value": "ergo", "text": "Ergoterapie", "visibleIf": "{question14.ergo} notempty" },
-                { "value": "sensoricka", "text": "Senzorická integrace", "visibleIf": "{question14.sensoricka} notempty" },
-                { "value": "neurovyvoj", "text": "Neurovývojová terapie", "visibleIf": "{question14.neurovyvoj} notempty" },
-                { "value": "snoezelen", "text": "Snoezelen", "visibleIf": "{question14.snoezelen} notempty" },
-                { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
-                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
-                { "value": "auditivni", "text": "Auditivní intervence (JIAS, Tomatis, Benaudira)", "visibleIf": "{question14.auditivni} notempty" },
-                { "value": "esdm", "text": "ESDM (Early Start Denver Model)", "visibleIf": "{question14.esdm} notempty" },
-                { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
-                { "value": "expresivni", "text": "Expresivní terapie (Muzikoterapie, Arteterapie, Dramaterapie, Taneční a pohybová terapie)", "visibleIf": "{question14.expresivni} notempty" },
-                { "value": "zvire", "text": "Terapie asistované zvířaty (Canisterapie, Hipoterapie, Delfínoterapie)", "visibleIf": "{question14.zvire} notempty" },
-                { "value": "lego", "text": "Lego terapie", "visibleIf": "{question14.lego} notempty" },
-                { "value": "neurofeedback", "text": "Neurofeedback", "visibleIf": "{question14.neurofeedback} notempty" },
-                { "value": "kranio", "text": "Kraniosakrální terapie", "visibleIf": "{question14.kranio} notempty" },
-                { "value": "mikroflora", "text": "Léčba střevní mikroflóry", "visibleIf": "{question14.mikroflora} notempty" },
-                { "value": "jine", "text": "Jiný typ", "visibleIf": "{question14.jine} notempty" }
+                { "value": "aba", "text": "ABA (Aplikovaná Behaviorální Analýza)" },
+                { "value": "kbt", "text": "KBT (Kognitivně-Behaviorální Terapie)" },
+                { "value": "dir", "text": "DIR/Floortime" },
+                { "value": "sonrise", "text": "Son-Rise program" },
+                { "value": "logo", "text": "Logopedická terapie" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)" },
+                { "value": "makaton", "text": "Znakování do řeči a Makaton" },
+                { "value": "s2c", "text": "S2C (Hláskování)" },
+                { "value": "strukturovane", "text": "Strukturované učení" },
+                { "value": "socialni", "text": "Sociální příběhy" },
+                { "value": "ergo", "text": "Ergoterapie" },
+                { "value": "sensoricka", "text": "Senzorická integrace" },
+                { "value": "neurovyvoj", "text": "Neurovývojová terapie" },
+                { "value": "snoezelen", "text": "Snoezelen" },
+                { "value": "handle", "text": "HANDLE" },
+                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda" },
+                { "value": "auditivni", "text": "Auditivní intervence (JIAS, Tomatis, Benaudira)" },
+                { "value": "esdm", "text": "ESDM (Early Start Denver Model)" },
+                { "value": "ota_vti", "text": "O.T.A. a VTI" },
+                { "value": "expresivni", "text": "Expresivní terapie (Muzikoterapie, Arteterapie, Dramaterapie, Taneční a pohybová terapie)" },
+                { "value": "zvire", "text": "Terapie asistované zvířaty (Canisterapie, Hipoterapie, Delfínoterapie)" },
+                { "value": "lego", "text": "Lego terapie" },
+                { "value": "neurofeedback", "text": "Neurofeedback" },
+                { "value": "kranio", "text": "Kraniosakrální terapie" },
+                { "value": "mikroflora", "text": "Léčba střevní mikroflóry" },
+                { "value": "jine", "text": "Jiný typ" }
               ]
             }
           ]
@@ -443,7 +365,7 @@
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
                 { "value": "voks", "text": "VOKS", "visibleIf": "{question14.voks} notempty" },
-                { "value": "makaton", "text": "Makaton", "visibleIf": "{question14.makaton} notempty" },
+                { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
                 { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
                 { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },
                 { "value": "socialni", "text": "Sociální příběhy", "visibleIf": "{question14.socialni} notempty" },
@@ -452,7 +374,7 @@
                 { "value": "neurovyvoj", "text": "Neurovývojová terapie", "visibleIf": "{question14.neurovyvoj} notempty" },
                 { "value": "snoezelen", "text": "Snoezelen", "visibleIf": "{question14.snoezelen} notempty" },
                 { "value": "handle", "text": "HANDLE", "visibleIf": "{question14.handle} notempty" },
-                { "value": "feldenkrais", "text": "Feldenkrais", "visibleIf": "{question14.feldenkrais} notempty" },
+                { "value": "feldenkrais", "text": "Metoda Anat Baniel a Feldenkraisova metoda", "visibleIf": "{question14.feldenkrais} notempty" },
                 { "value": "auditivni", "text": "Auditivní intervence", "visibleIf": "{question14.auditivni} notempty" },
                 { "value": "esdm", "text": "ESDM", "visibleIf": "{question14.esdm} notempty" },
                 { "value": "ota_vti", "text": "O.T.A. a VTI", "visibleIf": "{question14.ota_vti} notempty" },
@@ -727,11 +649,10 @@
     };
 
     var survey = new Survey.Model(surveyJSON);
-    survey.requiredErrorText = "Vyberte jednu z možností";
 
     survey.onComplete.add(function(sender) {
       var xhr = new XMLHttpRequest();
-      var url = doPostUrl();
+      var url = "<?!= doPostUrl() ?>";
       xhr.open("POST", url);
       xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
       xhr.onload = function() {
@@ -746,16 +667,6 @@
     });
 
     survey.render(document.getElementById("surveyElement"));
-
-    // Zajištění změny barvy textových polí při vyplnění
-    document.addEventListener("input", function(e) {
-      if (e.target.tagName.toLowerCase() === "input" && e.target.type === "text") {
-        e.target.style.backgroundColor = e.target.value.trim() !== "" ? "#00C837" : "#0174DF";
-      }
-      if (e.target.tagName.toLowerCase() === "textarea") {
-        e.target.style.backgroundColor = e.target.value.trim() !== "" ? "#00C837" : "#0174DF";
-      }
-    });
   </script>
 </body>
 </html>

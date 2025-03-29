@@ -14,18 +14,16 @@
       margin: 0;
       padding: 0;
     }
-    /* Přepsání kontejnerů dotazníku – všechny stránky, panely, kontejnery atd. budou mít jednotné pozadí */
+    /* Přepis pozadí kontejnerů SurveyJS */
     .sv_main,
-    .sv_container,
     .sv_body_container,
+    .sv_container,
     .sv_page,
-    .sv_page_container,
-    .sv_panel,
     .sv_header,
     .sv_footer {
       background-color: #0174DF !important;
     }
-    /* Tlačítka (navigační, spouštěcí) – základní žlutá, při hover/aktivaci zelená */
+    /* Tlačítka – základní žlutá a při hover/aktivaci zelená */
     .sv_nav_btn,
     .sv_btn {
       background-color: #FFD84D !important;
@@ -37,11 +35,11 @@
     .sv_btn:hover {
       background-color: #00C837 !important;
     }
-    /* Globální nastavení chybové hlášky */
+    /* Globální nastavení chybové hlášky u povinných polí */
     .sv_q_required_text {
       font-style: normal;
     }
-    /* Checkboxy */
+    /* Checkboxy – nezaškrtnuté žluté, po označení zelené */
     .sv_q_checkbox_control .sv_q_checkbox_label {
       background-color: #FFD84D !important;
       color: #110453;
@@ -52,7 +50,7 @@
     .sv_q_checkbox_control input[type="checkbox"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Radiogroup */
+    /* Radiogroup – obdobně jako checkbox */
     .sv_q_radiogroup_control label {
       background-color: #FFD84D !important;
       color: #110453;
@@ -63,10 +61,7 @@
     .sv_q_radiogroup_control input[type="radio"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Rating */
-    .sv_q_rating {
-      background-color: transparent;
-    }
+    /* Rating – nezaškrtnuté žluté, označené zelené */
     .sv_q_rating .sv_q_radiogroup_item {
       background-color: #FFD84D !important;
       color: #110453;
@@ -76,7 +71,7 @@
     .sv_q_rating .sv_q_radiogroup_item input[type="radio"]:checked + label {
       background-color: #00C837 !important;
     }
-    /* Comment – box pro komentář */
+    /* Comment – textová pole s komentářem */
     .sv_q_comment {
       background-color: #FFD84D !important;
       padding: 10px;
@@ -93,14 +88,14 @@
     .sv_q_comment_textarea textarea.filled {
       background-color: #00C837 !important;
     }
-    /* Matrix – alternativní řádkování; pro SurveyJS v2 se používá třída sv_matrix_table */
-    .sv_matrix_table tr:nth-child(odd) {
+    /* Matrix – alternující řádky; používáme selektor pro tabulku ve vygenerované matici */
+    table.sv_matrix_table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
-    .sv_matrix_table tr:nth-child(even) {
+    table.sv_matrix_table tr:nth-child(even) {
       background-color: #FFD84D !important;
     }
-    .sv_matrix select {
+    table.sv_matrix_table select {
       background-color: #FFD84D !important;
       color: #110453;
       border: none;
@@ -108,7 +103,7 @@
       border-radius: 3px;
       transition: background-color 0.3s;
     }
-    .sv_matrix select:focus {
+    table.sv_matrix_table select:focus {
       background-color: #00C837 !important;
     }
   </style>
@@ -118,6 +113,10 @@
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
   <script>
+    // Nastavení češtiny a přepsání výchozí chybové zprávy
+    Survey.surveyLocalization.locales.cs.requiredError = "Vyberte jednu z možností";
+    Survey.surveyLocalization.currentLocale = "cs";
+
     var surveyJSON = {
       "locale": "cs",
       "title": "Dotazníkové šetření pro rodiče dětí s PAS",
@@ -467,7 +466,7 @@
                 { "value": "dir", "text": "DIR/Floortime", "visibleIf": "{question14.dir} notempty" },
                 { "value": "sonrise", "text": "Son-Rise program", "visibleIf": "{question14.sonrise} notempty" },
                 { "value": "logo", "text": "Logopedická terapie", "visibleIf": "{question14.logo} notempty" },
-                { "value": "voks", "text": "VOKS", "visibleIf": "{question14.voks} notempty" },
+                { "value": "voks", "text": "VOKS (Výměnný Obrázkový Komunikační Systém)", "visibleIf": "{question14.voks} notempty" },
                 { "value": "makaton", "text": "Znakování do řeči a Makaton", "visibleIf": "{question14.makaton} notempty" },
                 { "value": "s2c", "text": "S2C (Hláskování)", "visibleIf": "{question14.s2c} notempty" },
                 { "value": "strukturovane", "text": "Strukturované učení", "visibleIf": "{question14.strukturovane} notempty" },

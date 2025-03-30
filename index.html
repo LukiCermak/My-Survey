@@ -1061,7 +1061,7 @@
             {
               "type": "checkbox",
               "name": "question23",
-              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii' or {question22} = 'Náš přístup zůstal v zásadě stejný'",
+              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii' and {question22} <> 'Náš přístup zůstal v zásadě stejný'",
               "title": {
                 "cs": "V jakých oblastech se váš přístup nejvíce vyvíjel či změnil? (Vyberte prosím max. 3 nejdůležitější)"
               },
@@ -1080,7 +1080,7 @@
             {
               "type": "checkbox",
               "name": "question24",
-              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
+              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii' and {question22} <> 'Náš přístup zůstal v zásadě stejný'",
               "title": {
                 "cs": "Co bylo hlavním důvodem pro změnu vašeho přístupu? (Vyberte prosím max. 3 nejdůležitější)"
               },

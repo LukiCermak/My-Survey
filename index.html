@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
@@ -27,15 +27,16 @@
       color: #110453 !important;
     }
 
-    /* Kontejner otázek – ohraničení (stejná barva jako background), padding a margin */
+    /* Kontejner otázek – ohraničení modrou, padding, margin, zaoblení rohů s pozadím žluté barvy */
     .sv-question, .sv_q {
-      background-color: #0174DF !important;
-      border: 2px solid #0174DF;
+      background-color: #FFD84D !important; /* žluté pozadí */
+      border: 2px solid #0174DF; /* modré ohraničení */
       padding: 10px;
       margin-bottom: 10px;
+      border-radius: 10px; /* zaoblené rohy */
       transition: background-color 0.3s ease;
     }
-    /* Hover efekt kontejneru – žlutá */
+    /* Hover efekt kontejneru – žluté pozadí zůstává */
     .sv-question:hover, .sv_q:hover {
       background-color: #FFD84D !important;
     }
@@ -895,7 +896,7 @@
           "name": "popis_druhe_casti",
           "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
           "html": {
-            "default": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci v tabulce prosím odpovězte na následující otázky:</p><p style='margin-left: 20px;'><b>**Míra zapojení:**</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>**Efektivita:**</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>**Oblasti pokroku:**</b> V jakých oblastech jste zaznamenali největší pokrok díky této intervenci?<br><b>**Důvody využívání:**</b> Jaké jsou/byly hlavní důvody pro využívání této intervence?</p>",
+            "default": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci v tabulce prosím odpovězte na následující otázky:</p><p style='margin-left: 20px;'><b>**Míra zapojení:**</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>Efektivita:</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>Oblasti pokroku:</b> V jakých oblastech jste zaznamenali největší pokrok díky této intervenci?<br><b>Důvody využívání:</b> Jaké jsou/byly hlavní důvody pro využívání této intervence?</p>",
             "cs": "<p style='font-style: italic;'>Pro každou intervenční metodu, kterou aktuálně využíváte nebo jste využívali v minulosti, prosím vyplňte následující tabulku. V každém sloupci v tabulce prosím odpovězte na následující otázky:</p><p style='margin-left: 20px;'><br><b>Míra zapojení:</b> Jak byste charakterizovali svou účast na intervencích vašeho dítěte?<br><b>Efektivita:</b> Jak hodnotíte efektivitu této intervence? (1 - neefektivní, 5 - velmi efektivní)<br><b>Oblasti pokroku:</b> V jakých oblastech jste zaznamenali největší pokrok díky této intervenci?<br><b>Důvody využívání:</b> Jaké jsou/byly hlavní důvody pro využívání této intervence?</p>"
           }
         },

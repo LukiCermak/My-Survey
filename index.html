@@ -1,20 +1,16 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Dotazníkové šetření pro rodiče dětí s PAS</title>
 
-  <!-- SurveyJS CSS -->
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.0.1/survey-core.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.css" />
 
-  <!-- Font Open Sans -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
-  <!-- Vlastní styly -->
   <style>
-    /* Celkové pozadí, font a barva textu */
     html, body, .sv-root, .sv_main, .sv_container, .sv_body, .sd-body {
       background-color: #0174DF !important;
       margin: 0;
@@ -26,8 +22,6 @@
     .sd-title, .sd-description, .sv_header, .sv-description, .sv_p_description {
       color: #110453 !important;
     }
-
-    /* Kontejner otázek – ohraničení (stejná barva jako background), padding a margin */
     .sv-question, .sv_q {
       background-color: #0174DF !important;
       border: 2px solid #0174DF;
@@ -35,12 +29,6 @@
       margin-bottom: 10px;
       transition: background-color 0.3s ease;
     }
-    /* Hover efekt kontejneru – žlutá */
-    .sv-question:hover, .sv_q:hover {
-      background-color: #FFD84D !important;
-    }
-
-    /* Navigační tlačítka: výchozí žlutá, hover/focus/aktivace zelená */
     .sv-footer .sv-nav-btn,
     .sd-navigation__prev-btn,
     .sd-navigation__next-btn,
@@ -68,8 +56,6 @@
       background-color: #00C837 !important;
       color: #110453 !important;
     }
-
-    /* Checkboxy – výchozí žlutá, vybrané zelené */
     .sv_q_checkbox_control label span input + .sv_q_checkbox,
     .sd-item .sd-checkbox__control,
     .sv_q_checkbox_control .sv_q_checkbox {
@@ -82,8 +68,6 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-
-    /* Radiogroup – výchozí žlutá, vybrané zelené */
     .sv_q_radiogroup_control label span input + .sv_q_radiogroup_button,
     .sd-item .sd-radio__control,
     .sv_q_radiogroup_control .sv_q_radiogroup_button {
@@ -96,8 +80,6 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-
-    /* Rating – výchozí žlutá, vybrané zelené */
     .sv_q_rating .sv-rating-item,
     .sd-rating .sd-item,
     .sd-item--selectable:not(.sd-item--selected).sd-rating__item {
@@ -110,8 +92,6 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-
-    /* Comment (textová pole) – výchozí žlutá; při focus zelená */
     .sv_q_comment, .sv_q--comment, .sd-question__comment {
       background-color: #FFD84D !important;
       border: none !important;
@@ -129,8 +109,6 @@
       background-color: #00C837 !important;
       border-color: #00C837 !important;
     }
-
-    /* Matrix: střídání řádků – liché řádky modré, sudé žluté; prvky uvnitř výchozí žluté, při focus zelené */
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
     }
@@ -157,8 +135,6 @@
       color: #110453 !important;
       border: 1px solid #00C837 !important;
     }
-    
-    /* Chybové hlášení – tučně, tmavě červeně (#8B0000) */
     .sv_q_error, .sv_q_required_text {
       color: #8B0000 !important;
       font-weight: bold !important;
@@ -171,12 +147,11 @@
     .sv_q_has_error .sd-dropdown {
       border-color: #8B0000 !important;
     }
-
-    /* Input elements - žluté pozadí a zaoblené rohy */
-    input,
-    textarea,
-    select {
+    input, textarea, select {
       background-color: #FFD84D !important;
+      border-radius: 5px !important;
+    }
+    .sv_q_checkbox, .sv_q_radiogroup_button, .sd-checkbox__control, .sd-radio__control {
       border-radius: 5px !important;
     }
   </style>
@@ -184,19 +159,16 @@
 <body>
   <div id="surveyElement"></div>
 
-  <!-- Funkce doPostUrl – upravte dle Vašeho endpointu -->
   <script>
     function doPostUrl() {
       return "https://example.com/myEndpoint";
     }
   </script>
 
-  <!-- SurveyJS skripty -->
   <script src="https://unpkg.com/survey-core@2.0.1/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.0.1/survey-js-ui.min.js"></script>
 
   <script>
-    // Nastavení českého textu pro "Other (describe)"
     Survey.surveyStrings.otherItemText = "Jiné (popište)";
     Survey.surveyStrings.requiredError = "Vyberte jednu z možností";
   
@@ -635,7 +607,10 @@
             },
             {
               "value": "jine",
-              "text": "Jiný typ"
+              "text": {
+                "default": "Jiné...",
+                "cs": "Jiný typ"
+              }
             }
           ]
         }

@@ -28,6 +28,9 @@
       margin-bottom: 10px;
       transition: background-color 0.3s ease;
     }
+    .sv-question:hover, .sv_q:hover {
+      background-color: #FFD84D !important;
+    }
     .sv-footer .sv-nav-btn,
     .sd-navigation__prev-btn,
     .sd-navigation__next-btn,
@@ -55,8 +58,78 @@
       background-color: #00C837 !important;
       color: #110453 !important;
     }
+    .sv_q_checkbox_control label span input + .sv_q_checkbox,
+    .sd-item .sd-checkbox__control,
+    .sv_q_checkbox_control .sv_q_checkbox {
+      background-color: #FFD84D !important;
+      border: 1px solid #FFD84D !important;
+    }
+    .sv_q_checkbox_control label span input:checked + .sv_q_checkbox,
+    .sd-item .sd-checkbox__control input:checked + .sd-checkbox__svg,
+    .sv_q_checkbox_control input[type="checkbox"]:checked + label .sv_q_checkbox {
+      background-color: #00C837 !important;
+      border-color: #00C837 !important;
+    }
+    .sv_q_radiogroup_control label span input + .sv_q_radiogroup_button,
+    .sd-item .sd-radio__control,
+    .sv_q_radiogroup_control .sv_q_radiogroup_button {
+      background-color: #FFD84D !important;
+      border: 1px solid #FFD84D !important;
+    }
+    .sv_q_radiogroup_control label span input:checked + .sv_q_radiogroup_button,
+    .sd-item .sd-radio__control input:checked + .sd-radio__svg,
+    .sv_q_radiogroup_control input[type="radio"]:checked + label .sv_q_radiogroup_button {
+      background-color: #00C837 !important;
+      border-color: #00C837 !important;
+    }
+    .sv_q_rating .sv-rating-item,
+    .sd-rating .sd-item,
+    .sd-item--selectable:not(.sd-item--selected).sd-rating__item {
+      background-color: #FFD84D !important;
+      border: 1px solid #FFD84D !important;
+      color: #110453 !important;
+    }
+    .sv_q_rating .sv-rating-item.sv-rating-item--selected,
+    .sd-rating .sd-item--selected {
+      background-color: #00C837 !important;
+      border-color: #00C837 !important;
+    }
+    .sv_q_comment, .sv_q--comment, .sd-question__comment {
+      background-color: #FFD84D !important;
+      border: none !important;
+    }
+    .sv_q_comment textarea,
+    .sv_q--comment textarea,
+    .sd-question__comment textarea {
+      background-color: #FFD84D !important;
+      color: #110453 !important;
+      border: 1px solid #FFD84D !important;
+    }
+    .sv_q_comment textarea:focus,
+    .sv_q--comment textarea:focus,
+    .sd-question__comment textarea:focus {
+      background-color: #00C837 !important;
+      border-color: #00C837 !important;
+    }
     .sd-table tr:nth-child(odd) {
       background-color: #0174DF !important;
+    }
+    .sd-table tr:nth-child(even) {
+      background-color: #FFD84D !important;
+    }
+    .sd-table .sv_q_radiogroup_button,
+    .sd-table .sd-radio__control {
+      background-color: #FFD84D !important;
+      color: #110453 !important;
+      border: 1px solid #FFD84D !important;
+    }
+    .sd-table .sv_q_radiogroup_button:focus,
+    .sd-table .sv_q_radiogroup_button:active,
+    .sd-table .sd-radio__control:focus,
+    .sd-table .sd-radio__control:active {
+      background-color: #00C837 !important;
+      color: #110453 !important;
+      border: 1px solid #00C837 !important;
     }
     .sv_q_error, .sv_q_required_text {
       color: #8B0000 !important;
@@ -69,6 +142,10 @@
     .sv_q_has_error .sv_q_comment textarea,
     .sv_q_has_error .sd-dropdown {
       border-color: #8B0000 !important;
+    }
+    input, textarea {
+      background-color: #FFD84D !important;
+      border-radius: 5px !important;
     }
   </style>
 </head>
@@ -1218,8 +1295,8 @@
               "type": "html",
               "name": "question33",
               "html": {
-                "default": "<div style='text-align: center; font-size: 24px;'>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br><br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</div>",
-                "cs": "<div style='text-align: center; font-size: 24px;'>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br><br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</div>"
+                "default": "<p>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</p>",
+                "cs": "<p>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br><br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</p>"
               }
             }
           ]

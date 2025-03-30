@@ -390,146 +390,143 @@
               "showOtherItem": true
             },
             {
-  "type": "panel",
-  "name": "panel_question14",
-  "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
-  "title": {
-    "cs": "<b>U každé z následujících intervenčních metod prosím označte, zda ji aktuálně využíváte nebo jste ji využívali v minulosti:</b>"
-  },
-  "elements": [
-    {
-      "type": "html",
-      "name": "question14_info",
-      "html": "<b style='color:#8B0000;'>Označte pouze ty intervenční metody, se kterými máte zkušenost. Ostatní nechte prázdné.</b>"
-    },
-    {
-      "type": "matrix",
-      "name": "question14",
-      "isRequired": true,
-      "showCommentArea": true,
-      "commentText": {
-        "cs": "Zde uveďte o jaký typ intervence se jedná"
-      },
-      "alternateRows": true,
-      "columns": [
-        {
-          "value": "aktualne",
-          "text": "Aktuálně využíváme"
+              "type": "matrix",
+              "name": "question14",
+              "visibleIf": "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
+              "allowHtml": true,
+              "title": {
+                "cs": "U každé z následujících intervenčních metod prosím označte, zda ji aktuálně využíváte nebo jste ji využívali v minulosti:"
+              },
+              "description": {
+              "cs": "<b style='color:#8B0000;'>Označte pouze ty intervenční metody, se kterými máte zkušenost. Ostatní nechte prázdné.</b>"
+               },
+              "titleLocation": "top",
+              "descriptionLocation": "underTitle",
+              "isRequired": true,
+              "showCommentArea": true,
+              "commentText": {
+                "cs": "Zde uveďte o jaký typ intervence se jedná"
+              },
+              "alternateRows": true,
+              "columns": [
+                {
+                  "value": "aktualne",
+                  "text": "Aktuálně využíváme"
+                },
+                {
+                  "value": "minulost",
+                  "text": "Využívali jsme v minulosti"
+                }
+              ],
+              "rows": [
+                {
+                  "value": "aba",
+                  "text": "ABA (Aplikovaná Behaviorální Analýza)"
+                },
+                {
+                  "value": "kbt",
+                  "text": "KBT (Kognitivně-Behaviorální Terapie)"
+                },
+                {
+                  "value": "dir",
+                  "text": "DIR/Floortime"
+                },
+                {
+                  "value": "sonrise",
+                  "text": "Son-Rise program"
+                },
+                {
+                  "value": "logo",
+                  "text": "Logopedická terapie"
+                },
+                {
+                  "value": "voks",
+                  "text": "VOKS (Výměnný Obrázkový Komunikační Systém)"
+                },
+                {
+                  "value": "makaton",
+                  "text": "Znakování do řeči a Makaton"
+                },
+                {
+                  "value": "s2c",
+                  "text": "S2C (Hláskování)"
+                },
+                {
+                  "value": "strukturovane",
+                  "text": "Strukturované učení"
+                },
+                {
+                  "value": "socialni",
+                  "text": "Sociální příběhy"
+                },
+                {
+                  "value": "ergo",
+                  "text": "Ergoterapie"
+                },
+                {
+                  "value": "sensoricka",
+                  "text": "Senzorická integrace"
+                },
+                {
+                  "value": "neurovyvoj",
+                  "text": "Neurovývojová terapie"
+                },
+                {
+                  "value": "snoezelen",
+                  "text": "Snoezelen"
+                },
+                {
+                  "value": "handle",
+                  "text": "HANDLE"
+                },
+                {
+                  "value": "feldenkrais",
+                  "text": "Metoda Anat Baniel a Feldenkraisova metoda"
+                },
+                {
+                  "value": "auditivni",
+                  "text": "Auditivní intervence"
+                },
+                {
+                  "value": "esdm",
+                  "text": "ESDM"
+                },
+                {
+                  "value": "ota_vti",
+                  "text": "O.T.A. a VTI"
+                },
+                {
+                  "value": "expresivni",
+                  "text": "Expresivní terapie"
+                },
+                {
+                  "value": "zvire",
+                  "text": "Terapie asistované zvířaty"
+                },
+                {
+                  "value": "lego",
+                  "text": "Lego terapie"
+                },
+                {
+                  "value": "neurofeedback",
+                  "text": "Neurofeedback"
+                },
+                {
+                  "value": "kranio",
+                  "text": "Kraniosakrální terapie"
+                },
+                {
+                  "value": "mikroflora",
+                  "text": "Léčba střevní mikroflóry"
+                },
+                {
+                  "value": "jine",
+                  "text": "Jiný typ"
+                }
+              ]
+            }
+          ]
         },
-        {
-          "value": "minulost",
-          "text": "Využívali jsme v minulosti"
-        }
-      ],
-      "rows": [
-        {
-          "value": "aba",
-          "text": "ABA (Aplikovaná Behaviorální Analýza)"
-        },
-        {
-          "value": "kbt",
-          "text": "KBT (Kognitivně-Behaviorální Terapie)"
-        },
-        {
-          "value": "dir",
-          "text": "DIR/Floortime"
-        },
-        {
-          "value": "sonrise",
-          "text": "Son-Rise program"
-        },
-        {
-          "value": "logo",
-          "text": "Logopedická terapie"
-        },
-        {
-          "value": "voks",
-          "text": "VOKS (Výměnný Obrázkový Komunikační Systém)"
-        },
-        {
-          "value": "makaton",
-          "text": "Znakování do řeči a Makaton"
-        },
-        {
-          "value": "s2c",
-          "text": "S2C (Hláskování)"
-        },
-        {
-          "value": "strukturovane",
-          "text": "Strukturované učení"
-        },
-        {
-          "value": "socialni",
-          "text": "Sociální příběhy"
-        },
-        {
-          "value": "ergo",
-          "text": "Ergoterapie"
-        },
-        {
-          "value": "sensoricka",
-          "text": "Senzorická integrace"
-        },
-        {
-          "value": "neurovyvoj",
-          "text": "Neurovývojová terapie"
-        },
-        {
-          "value": "snoezelen",
-          "text": "Snoezelen"
-        },
-        {
-          "value": "handle",
-          "text": "HANDLE"
-        },
-        {
-          "value": "feldenkrais",
-          "text": "Metoda Anat Baniel a Feldenkraisova metoda"
-        },
-        {
-          "value": "auditivni",
-          "text": "Auditivní intervence"
-        },
-        {
-          "value": "esdm",
-          "text": "ESDM"
-        },
-        {
-          "value": "ota_vti",
-          "text": "O.T.A. a VTI"
-        },
-        {
-          "value": "expresivni",
-          "text": "Expresivní terapie"
-        },
-        {
-          "value": "zvire",
-          "text": "Terapie asistované zvířaty"
-        },
-        {
-          "value": "lego",
-          "text": "Lego terapie"
-        },
-        {
-          "value": "neurofeedback",
-          "text": "Neurofeedback"
-        },
-        {
-          "value": "kranio",
-          "text": "Kraniosakrální terapie"
-        },
-        {
-          "value": "mikroflora",
-          "text": "Léčba střevní mikroflóry"
-        },
-        {
-          "value": "jine",
-          "text": "Jiný typ"
-        }
-      ]
-    }
-  ]
-},
         {
           "name": "page4b",
           "title": {
@@ -1238,6 +1235,7 @@
       "pageNextText": "Další",
       "completeText": "Odeslat",
       "firstPageIsStartPage": true
+    };
 
     var survey = new Survey.Model(surveyJSON);
 

@@ -153,13 +153,17 @@
       background-color: #FFD84D !important;
       border-radius: 5px !important;
     }
-    /* Specifické styly pro dropdown, aby se vybraná hodnota zobrazovala správně */
+    /* Odstranění barevných modifikací u dropdown menu */
     .sv-dropdown select {
-      background-color: #FFD84D !important;
-      border-radius: 5px !important;
-      color: #110453 !important;
-      padding: 5px;
-      border: 1px solid #FFD84D !important;
+      background-color: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      color: inherit !important;
+      padding: 0 !important;
+    }
+    /* Při najíždění na jednotlivé položky dropdown menu nastaví světle zelenou barvu */
+    .sv-dropdown option:hover {
+      background-color: lightgreen !important;
     }
   </style>
 </head>
@@ -185,7 +189,7 @@
       "logo": {
         "cs": "https://api.surveyjs.io/private/Surveys/files?name=ae53b81f-3b25-4227-9a83-0498604c0ad9"
       },
-      "completedHtml": "Děkujeme za vyplnění dotazníku",
+      "completedHtml": "<div style='text-align: center; font-size: 24px;'>Děkujeme za vyplnění dotazníku</div>",
       "pages": [
         {
           "name": "welcomePage",
@@ -862,10 +866,7 @@
                 },
                 {
                   "value": "jine",
-                  "text": {
-                    "default": "Jiné...",
-                    "cs": "Jiný typ"
-                  },
+                  "text": "Jiný typ",
                   "visibleIf": "{question14.jine} notempty"
                 }
               ]
@@ -1312,8 +1313,8 @@
               "type": "html",
               "name": "question33",
               "html": {
-                "default": "<p>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</p>",
-                "cs": "<p>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br><br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</p>"
+                "default": "<div style='text-align: center; font-size: 24px;'>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br><br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</div>",
+                "cs": "<div style='text-align: center; font-size: 24px;'>Děkujeme Vám za Váš čas a ochotu podělit se o své cenné zkušenosti.<br><br>Jako poděkování jsme pro Vás připravili e-knihu <em>\"Průvodce intervenčními metodami pro rodiče dětí s PAS\"</em>. Tato kniha obsahuje aktuální informace, praktické rady a užitečné zdroje pro péči o Vaše dítě s autismem. Průvodce je možné stáhnout zde: [vložit odkaz na stažení].<br><br>Pokud máte zájem o shrnutí výsledků této studie nebo chcete poskytnout zpětnou vazbu k dotazníku, kontaktujte mě prosím na <a href='mailto:cermalu1@uhk.cz'>cermalu1@uhk.cz</a>.<br><br>Ještě jednou děkuji za Vaši účast a přeji Vám mnoho sil a úspěchů ve Vaší důležité roli.<br><br>S úctou,<br>Lukáš Čermák<br>Student speciální pedagogiky<br>Univerzita Hradec Králové</div>"
               }
             }
           ]

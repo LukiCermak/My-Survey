@@ -294,6 +294,22 @@
                 "Nespecifikováno"
               ]
             },
+                    {
+          "type": "radiogroup",
+          "name": "question8",
+          "title": {
+            "cs": "Jaký stupeň příspěvku na péči pobírá vaše dítě s PAS?"
+          },
+          "choices": [
+            "I.stupeň (lehká závislost)",
+            "II.stupeň (středně těžká závislost)",
+            "III.stupeň (těžká závislost)",
+            "IV.stupeň (úplná závislost)",
+            "Nepobírá příspěvek na péči",
+            "Žádost o příspěvek je v procesu",
+            "Nepřeji si na tuto otázku odpovídat"
+          ]
+        },
             {
               "type": "checkbox",
               "name": "question9",
@@ -1182,7 +1198,7 @@
             {
               "type": "comment",
               "name": "question32",
-              "visibleIf": "{question2} = '2 děti' or {question2} = '3 a více dětí'",
+              "visibleIf": "{question2} = '2 děti' or {question2} = '3 a více dětí'", "{question12} <> 'Zatím jsme nezačali využívat žádnou odbornou podporu nebo terapii'",
               "title": {
                 "cs": "Pokud máte více než jedno dítě s PAS, prosíme, stručně popište případné významné rozdíly v intervencích, jejich dostupnosti nebo efektivitě pro vaše další děti s PAS?"
               }
